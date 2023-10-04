@@ -34,8 +34,12 @@ module.exports = {
         },
       },
     ],
+    // jsx 문법을 .tsx 파일에서도 허용
+    'react/jsx-filename-extension': ['error', { extensions: ['.jsx', '.tsx'] }],
     // console.log 찾기 쉽게 경고로 표시
     'no-console': 'warn',
+    // React import문 생략
+    'react/react-in-jsx-scope': 'off',
   },
   settings: {
     'import/resolver': {
