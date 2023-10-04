@@ -1,27 +1,31 @@
-# React + TypeScript + Vite
+구글 설문 조사를 React로 구현하는 과제입니다.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<img src="public/google-form.png" alt="제목없는 설문지">
 
-Currently, two official plugins are available:
+### 기능
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 설문지 제목 추가, 편집
+- 설문지 설명 추가, 편집
+- 질문 추가
+  - 단답형
+  - 장문형
+  - 객관식 질문
+  - 체크박스
+  - 드롭다운
+- 질문 복사 기능
+- 질문 삭제 기능
+- 필수 옵션 설정 기능
+- 미리 보기 기능
+- [제출] 버튼 눌렀을 경우 사용자가 작성한 데이터를 보여주는 기능
+- 질문 순서 변경 (Drag & Drop)
+- 질문의 옵션 순서 변경 (Drag & Drop)
 
-## Expanding the ESLint configuration
+### 기술 스택
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+React, TypeScript, Redux, Redux-toolkit, Vite
 
-- Configure the top-level `parserOptions` property like this:
+### 실행 방법
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
 ```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+yarn dev
+```
