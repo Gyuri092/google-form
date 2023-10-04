@@ -5,9 +5,8 @@ import { SurveyEditor } from './routes/SurveyEditor';
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<SurveyEditor />}>
-        <Route path="preview" element={<SurveyPreview />} />
-      </Route>
+      <Route path="/" element={<SurveyEditor />} />
+      <Route path="/preview" element={<SurveyPreview />} />
     </Routes>
   );
 }
