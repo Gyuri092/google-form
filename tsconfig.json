@@ -5,6 +5,7 @@
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "jsxImportSource": "@emotion/react",
 
     /* Bundler mode */
     "moduleResolution": "bundler",
