@@ -40,6 +40,11 @@ module.exports = {
     'no-console': 'warn',
     // React import문 생략
     'react/react-in-jsx-scope': 'off',
+    'import/prefer-default-export': 'off',
+    'react/function-component-definition': [
+      2,
+      { namedComponents: ['arrow-function', 'function-declaration'] },
+    ],
   },
   settings: {
     'import/resolver': {
