@@ -41,10 +41,13 @@ module.exports = {
     // React import문 생략
     'react/react-in-jsx-scope': 'off',
     'import/prefer-default-export': 'off',
+    // 화살표 함수 허용
     'react/function-component-definition': [
       2,
       { namedComponents: ['arrow-function', 'function-declaration'] },
     ],
+    // emotion css props
+    'react/no-unknown-property': ['error', { ignore: ['css'] }],
   },
   settings: {
     'import/resolver': {
