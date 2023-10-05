@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { Input } from '../../components/Input';
 
 export const SurveyEditor = () => {
   return (
@@ -43,8 +44,11 @@ export const SurveyEditor = () => {
                 0 3px 3px rgba(0, 0, 0, 0.12),
                 0 1px 1px rgba(0, 0, 0, 0.14),
                 0 1px 2px rgba(0, 0, 0, 0.2);
+              padding: 30px 20px;
             `}
-          />
+          >
+            <Input />
+          </div>
         </div>
         <div
           css={css`
