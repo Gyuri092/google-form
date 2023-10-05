@@ -2,12 +2,15 @@ import { css } from '@emotion/react';
 
 const reset = css`
   * {
+    width: 100%;
+    height: 100%;
     margin: 0;
     padding: 0;
     border: 0;
     font-size: 100%;
     font-weight: 400;
-    font: inherit;
+    font-family: 'docs-Roboto', Helvetica, Arial, sans-serif;
+    letter-spacing: 0;
     vertical-align: baseline;
     text-decoration: none;
     list-style: none;
