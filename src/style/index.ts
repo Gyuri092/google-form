@@ -48,5 +48,13 @@ const reset = css`
     border-collapse: collapse;
     border-spacing: 0;
   }
+  select {
+    border: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url(../) no-repeat 80% 50%;
+  }
 `;
 export default reset;

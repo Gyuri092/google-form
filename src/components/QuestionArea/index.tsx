@@ -28,7 +28,29 @@ export const QuestionArea = () => {
           `}
         />
       )}
-      <Input />
+      <div
+        css={css`
+          display: flex;
+        `}
+      >
+        <Input />
+        <select
+          name="question-option"
+          id=""
+          css={css`
+            width: 208px;
+            height: 48px;
+            border-radius: 4px solid #dadce0;
+            outline: none;
+          `}
+        >
+          <option value="short-answer">단답형</option>
+          <option value="long-sentence">장문형</option>
+          <option value="multiple-choice-questions">객관식 질문</option>
+          <option value="check-box">체크 박스</option>
+          <option value="drop-down">드롭 다운</option>
+        </select>
+      </div>
     </form>
   );
 };
