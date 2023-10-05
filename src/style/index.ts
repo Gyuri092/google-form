@@ -9,7 +9,8 @@ const reset = css`
     border: 0;
     font-size: 100%;
     font-weight: 400;
-    font: inherit;
+    font-family: 'docs-Roboto', Helvetica, Arial, sans-serif;
+    letter-spacing: 0;
     vertical-align: baseline;
     text-decoration: none;
     list-style: none;
