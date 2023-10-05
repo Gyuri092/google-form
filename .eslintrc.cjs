@@ -40,6 +40,7 @@ module.exports = {
     'no-console': 'warn',
     // React import문 생략
     'react/react-in-jsx-scope': 'off',
+    // 파일에서 하나의 코드만 내보낼 때 export default를 사용하게 하는 규칙 off
     'import/prefer-default-export': 'off',
     // 화살표 함수 허용
     'react/function-component-definition': [
@@ -48,6 +49,10 @@ module.exports = {
     ],
     // emotion css props
     'react/no-unknown-property': ['error', { ignore: ['css'] }],
+    // 구조분해할당 강제하는 규칙 off
+    'react/destructuring-assignment': 'off',
+    // props 무조건 1개 이상 존재해야 하는 규칙 off
+    'react/require-default-props': 'off',
   },
   settings: {
     'import/resolver': {
