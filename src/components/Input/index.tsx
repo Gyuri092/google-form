@@ -2,6 +2,8 @@ import { SerializedStyles, css } from '@emotion/react';
 import { useState } from 'react';
 
 interface Props {
+  readonly placeholder?: string;
+  readonly defaultValue?: string;
   readonly inputStyle?: SerializedStyles;
 }
 
@@ -20,6 +22,8 @@ export const Input = (props: Props) => {
         `}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
+        placeholder={props.placeholder}
+        defaultValue={props.defaultValue}
       />
       {isFocused && (
         <div
