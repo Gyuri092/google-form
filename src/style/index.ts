@@ -49,6 +49,7 @@ const reset = css`
     border-spacing: 0;
   }
   select {
+    cursor: pointer;
     border: none;
     border-radius: 0;
     -webkit-appearance: none;
