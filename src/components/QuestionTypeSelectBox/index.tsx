@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-export const Select = () => {
+export const QuestionTypeSelectBox = () => {
   return (
     <select
       name="question-option"

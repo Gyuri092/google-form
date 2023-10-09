@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { useState } from 'react';
 import { Input } from '../Input';
-import { Select } from '../Select';
+import { QuestionTypeSelectBox } from '../QuestionTypeSelectBox';
 
 export const QuestionArea = () => {
   const [isFocused, setIsFocused] = useState(false);
@@ -64,8 +64,11 @@ export const QuestionArea = () => {
             `}
           />
         </div>
-        <Select />
+        <QuestionTypeSelectBox />
       </div>
+      <label>
+        <input />
+      </label>
     </form>
   );
 };
