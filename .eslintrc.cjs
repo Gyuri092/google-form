@@ -53,6 +53,8 @@ module.exports = {
     'react/destructuring-assignment': 'off',
     // props 무조건 1개 이상 존재해야 하는 규칙 off
     'react/require-default-props': 'off',
+    // airbnb config에서 htmlFor와 nesting을 모두 사용하도록 강제하는 세팅 비활성화
+    'jsx-a11y/label-has-associated-control': ['error', {}],
   },
   settings: {
     'import/resolver': {

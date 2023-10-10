@@ -13,9 +13,12 @@ export const SurveyEditor = () => {
     >
       <div
         css={css`
-          width: 50%;
+          width: 770px;
           display: flex;
           flex-direction: column;
+          @media (max-width: 771px) {
+            width: 100%;
+          }
         `}
       >
         <TitleArea />
