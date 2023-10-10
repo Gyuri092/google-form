@@ -2,6 +2,7 @@ import { SerializedStyles, css } from '@emotion/react';
 import { useState } from 'react';
 
 interface Props {
+  readonly name?: string;
   readonly placeholder?: string;
   readonly defaultValue?: string;
   readonly inputStyle?: SerializedStyles;
@@ -11,8 +12,15 @@ export const Input = (props: Props) => {
   const [isFocused, setIsFocused] = useState(false);
 
   return (
-    <>
+    <div
+      css={css`
+        height: auto;
+        position: relative;
+      `}
+    >
       <input
+        type="text"
+        name={props.name}
         css={css`
           height: 50px;
           outline: none;
@@ -28,6 +36,9 @@ export const Input = (props: Props) => {
       {isFocused && (
         <div
           css={css`
+            position: absolute;
+            bottom: 0;
+            left: 0;
             height: 2px;
             background: #673ab6;
             animation: AppearUnderline 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -44,6 +55,6 @@ export const Input = (props: Props) => {
           `}
         />
       )}
-    </>
+    </div>
   );
 };

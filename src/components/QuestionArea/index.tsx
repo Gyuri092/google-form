@@ -1,10 +1,12 @@
 import { css } from '@emotion/react';
 import { useState } from 'react';
+import { AddOptionLine } from '../AddOptionLine';
 import { Input } from '../Input';
+import { QuestionOption } from '../QuestionOption';
 import { QuestionTypeSelectBox } from '../QuestionTypeSelectBox';
 
 export const QuestionArea = () => {
-  const [isFocused, setIsFocused] = useState(false);
+  const [isFocused, setIsFocused] = useState(true);
   return (
     <form
       css={css`
@@ -42,8 +44,10 @@ export const QuestionArea = () => {
       )}
       <div
         css={css`
+          height: 50px;
           display: flex;
           justify-content: space-between;
+          margin-bottom: 16px;
         `}
       >
         <div
@@ -52,6 +56,7 @@ export const QuestionArea = () => {
           `}
         >
           <Input
+            placeholder="질문"
             inputStyle={css`
               font-size: 11pt;
               padding: 16px;
@@ -66,9 +71,8 @@ export const QuestionArea = () => {
         </div>
         <QuestionTypeSelectBox />
       </div>
-      <label>
-        <input />
-      </label>
+      <QuestionOption />
+      <AddOptionLine />
     </form>
   );
 };

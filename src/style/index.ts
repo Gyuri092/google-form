@@ -57,5 +57,9 @@ const reset = css`
     appearance: none;
     background: url(../) no-repeat 80% 50%;
   }
+  button {
+    background: none;
+    cursor: pointer;
+  }
 `;
 export default reset;

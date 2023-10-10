@@ -55,8 +55,6 @@ export const TitleArea = () => {
           placeholder="설문지 설명"
           inputStyle={css`
             font-size: 11pt;
-            height: 30px;
-            margin-top: 10px;
           `}
         />
       </form>
