@@ -26,6 +26,14 @@ React, TypeScript, Redux, Redux-toolkit, Vite
 
 ### 실행 방법
 
+1. 패키지 설치
+
+```
+yarn
+```
+
+2. 로컬에서 실행
+
 ```
 yarn dev
 ```

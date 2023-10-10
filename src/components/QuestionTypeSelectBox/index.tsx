@@ -14,12 +14,11 @@ export const QuestionTypeSelectBox = () => {
         padding: 8px 48px;
         outline: none;
       `}
+      defaultValue="multiple-choice-questions"
     >
       <option value="short-answer">단답형</option>
       <option value="long-sentence">장문형</option>
-      <option value="multiple-choice-questions" selected>
-        객관식 질문
-      </option>
+      <option value="multiple-choice-questions">객관식 질문</option>
       <option value="check-box">체크 박스</option>
       <option value="drop-down">드롭 다운</option>
     </select>

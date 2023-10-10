@@ -27,7 +27,7 @@ export const AddOptionLine = () => {
       >
         <input
           type="text"
-          value="옵션 추가"
+          defaultValue="옵션 추가"
           css={css`
             width: 60px;
             height: 30px;
