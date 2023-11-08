@@ -1,35 +1,40 @@
-import { css } from '@emotion/react';
-import { BiCircle } from 'react-icons/bi';
-import { Input } from '../Input';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import { WritingAnswer } from './WritingAnswer';
+import { MultipleChoice } from './MultipleChoice';
+import { DropDown } from './DropDown';
+import { CheckBox } from './CheckBox';
+import { AddOptionLine } from '../AddOptionLine';
+import { ToolsBlock } from '../ToolsBlock';
 
 export const QuestionOption = () => {
+  const questionType = useSelector(
+    (state: RootState) => state.questionType.value,
+  );
+  const renderQuestion = () => {
+    switch (questionType) {
+      case 'multiple-choice-questions':
+        return <MultipleChoice />;
+      case 'short-answer':
+        return <WritingAnswer questionType={questionType} />;
+      case 'long-sentence':
+        return <WritingAnswer questionType={questionType} />;
+      case 'check-box':
+        return <CheckBox />;
+      case 'drop-down':
+        return <DropDown />;
+      default:
+        return null;
+    }
+  };
+
   return (
-    <label
-      htmlFor="defaultQuestion"
-      css={css`
-        height: auto;
-        display: flex;
-        align-items: center;
-        margin-bottom: 16px;
-      `}
-    >
-      <BiCircle
-        css={css`
-          width: 24px;
-          height: 24px;
-          color: #dadce0;
-          margin-right: 8px;
-        `}
-      />
-      <Input
-        defaultValue="옵션 1"
-        name="defaultQuestion"
-        inputStyle={css`
-          height: 30px;
-          padding: 1px 1px 1px 0;
-          font-size: 11pt;
-        `}
-      />
-    </label>
+    <>
+      {renderQuestion()}
+      {questionType !== 'short-answer' && questionType !== 'long-sentence' && (
+        <AddOptionLine />
+      )}
+      <ToolsBlock />
+    </>
   );
 };

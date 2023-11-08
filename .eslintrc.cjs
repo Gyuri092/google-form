@@ -55,6 +55,11 @@ module.exports = {
     'react/require-default-props': 'off',
     // airbnb config에서 htmlFor와 nesting을 모두 사용하도록 강제하는 세팅 비활성화
     'jsx-a11y/label-has-associated-control': ['error', {}],
+    // redux-toolkit 사용 시 props로 받은 state를 immer를 통해 업데이트 하므로 재할당 관련 에러 off
+    'no-param-reassign': [
+      'error',
+      { props: true, ignorePropertyModificationsFor: ['state'] },
+    ],
   },
   settings: {
     'import/resolver': {
