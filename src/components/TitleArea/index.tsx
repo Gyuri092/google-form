@@ -11,6 +11,8 @@ export const TitleArea = () => {
         position: relative;
         margin-bottom: 14px;
       `}
+      onFocus={() => setIsFocused(true)}
+      onBlur={() => setIsFocused(false)}
     >
       <div
         css={css`
@@ -34,8 +36,6 @@ export const TitleArea = () => {
           padding: 30px 20px;
           position: relative;
         `}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
       >
         {isFocused && (
           <div
