@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-export interface selectedType {
+export interface SelectedType {
   value: string;
 }
 
-const initialState: selectedType = {
+const initialState: SelectedType = {
   value: 'multiple-choice-questions',
 };
 
