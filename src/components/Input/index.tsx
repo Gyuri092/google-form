@@ -2,6 +2,7 @@ import { SerializedStyles, css } from '@emotion/react';
 import { useState } from 'react';
 
 interface Props {
+  readonly key?: string;
   readonly name?: string;
   readonly placeholder?: string;
   readonly defaultValue?: string;
@@ -14,6 +15,7 @@ export const Input = (props: Props) => {
 
   return (
     <div
+      key={props.key}
       css={css`
         height: auto;
         position: relative;

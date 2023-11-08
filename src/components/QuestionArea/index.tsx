@@ -7,12 +7,7 @@ import { QuestionOption } from '../QuestionOption';
 import { QuestionTypeSelectBox } from '../QuestionTypeSelectBox';
 import { RootState } from '../../store';
 
-interface Props {
-  key: string;
-  value: Questions;
-}
-
-export const QuestionArea = (props: Props) => {
+export const QuestionArea = ({ value }: { value: Questions }) => {
   const [isFocused, setIsFocused] = useState(true);
   const formRef = useRef<HTMLFormElement>(null);
   const questionType = useSelector(
@@ -34,7 +29,6 @@ export const QuestionArea = (props: Props) => {
 
   return (
     <form
-      key={props.key}
       ref={formRef}
       css={css`
         height: auto;
@@ -91,7 +85,7 @@ export const QuestionArea = (props: Props) => {
                 }
               }
             `}
-            defaultValue={props.value.title}
+            defaultValue={value.title}
           />
         </div>
         <QuestionTypeSelectBox />
