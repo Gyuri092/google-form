@@ -5,6 +5,7 @@ import { MdContentCopy } from 'react-icons/md';
 
 export const ToolsBlock = () => {
   const [hoverItem, setHoverItem] = useState('');
+  const [isRequired, setIsRequired] = useState(false);
 
   return (
     <div
@@ -22,6 +23,14 @@ export const ToolsBlock = () => {
           position: relative;
           justify-content: flex-end;
           align-items: center;
+        `}
+      >
+        <div
+          css={css`
+            width: auto;
+            height: auto;
+            display: flex;
+            position: relative;
           button {
             width: 48px;
             height: 48px;
@@ -70,13 +79,72 @@ export const ToolsBlock = () => {
             justify-content: center;
             align-items: center;
             position: absolute;
-            right: ${hoverItem === 'copy' ? '48px' : '0'};
-            bottom: -10px;
+              left: ${hoverItem === 'copy' ? '2px' : '52px'};
+              bottom: -24px;
             opacity: ${hoverItem === '' && 0};
           `}
         >
           {hoverItem === 'copy' ? '복사' : '삭제'}
         </p>
+        </div>
+
+        <div
+          css={css`
+            border-left: 1px solid #dadce0;
+            height: 32px;
+            margin: 0 16px;
+            width: 0;
+          `}
+        />
+        <label
+          css={css`
+            font-size: 14px;
+            color: #202124;
+            position: relative;
+            display: flex;
+            width: 80px;
+            height: 14px;
+            vertical-align: middle;
+            input {
+              display: none;
+            }
+            div {
+              cursor: pointer;
+              background-color: ${!isRequired ? '#e1d8f1' : '#b9b9b9'};
+              transition: 0.4s;
+              border-radius: 34px;
+              :before {
+                border-radius: 50%;
+                position: absolute;
+                content: '';
+                height: 20px;
+                width: 20px;
+                right: 20px;
+                bottom: -4px;
+                border: 1px solid ${!isRequired ? '#e1d8f1' : '#b9b9b9'};
+                background-color: ${!isRequired ? '#673ab7' : '#fff'};
+                transition: 0.4s;
+                transform: ${!isRequired
+                  ? 'translateX(20px)'
+                  : 'translateX(0)'};
+              }
+            }
+          `}
+        >
+          <span
+            css={css`
+              display: block;
+            `}
+          >
+            필수
+          </span>
+          <input
+            type="checkbox"
+            checked={!isRequired}
+            onChange={() => setIsRequired((prev) => !prev)}
+          />
+          <div />
+        </label>
       </div>
     </div>
   );
