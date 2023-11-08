@@ -1,7 +1,10 @@
 import { css } from '@emotion/react';
 import { BiCircle } from 'react-icons/bi';
+import { useDispatch } from 'react-redux';
+import { addOption } from '../../slice/questionOptionSlice';
 
 export const AddOptionLine = () => {
+  const dispatch = useDispatch();
   return (
     <label
       htmlFor="addOpttion"
@@ -25,12 +28,13 @@ export const AddOptionLine = () => {
           align-items: center;
         `}
       >
-        <input
-          type="text"
-          defaultValue="옵션 추가"
+        <button
+          type="button"
           css={css`
             width: 60px;
             height: 30px;
+            display: flex;
+            align-items: center;
             padding: 1px 2px 1px 0;
             outline: none;
             font-size: 11pt;
@@ -41,7 +45,10 @@ export const AddOptionLine = () => {
               border-bottom: 1px solid #dadce0;
             }
           `}
-        />
+          onClick={() => dispatch(addOption())}
+        >
+          옵션 추가
+        </button>
         또는
         <button
           type="button"
