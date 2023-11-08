@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { useState } from 'react';
-import { AddOptionLine } from '../AddOptionLine';
 import { Input } from '../Input';
 import { QuestionOption } from '../QuestionOption';
 import { QuestionTypeSelectBox } from '../QuestionTypeSelectBox';
@@ -10,38 +9,45 @@ export const QuestionArea = () => {
   return (
     <form
       css={css`
-        height: ${isFocused ? '323px' : '176px'};
+        /* height: ${isFocused ? '323px' : '176px'}; */
+        height: auto;
         border: 1px solid #dadce0;
         border-radius: 8px;
         padding: 20px;
         position: relative;
+        box-shadow: ${isFocused && '0 3px 3px rgba(0, 0, 0, 0.12)'},
+          ${isFocused && '0 1px 1px rgba(0, 0, 0, 0.14)'},
+          ${isFocused && '0 1px 2px rgba(0, 0, 0, 0.2)'};
       `}
       onFocus={() => setIsFocused(true)}
       onBlur={() => setIsFocused(false)}
     >
-      {isFocused ? (
-        <div
-          css={css`
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 6px;
-            background: #4285f4;
-            border-radius: 8px 0 0 8px;
-          `}
-        />
-      ) : (
-        <div
-          css={css`
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 6px;
-            background: #137333;
-            border-radius: 8px 0 0 8px;
-          `}
-        />
-      )}
+      {
+        isFocused && (
+          <div
+            css={css`
+              position: absolute;
+              left: -1px;
+              top: 0;
+              width: 6px;
+              background: #4285f4;
+              border-radius: 8px 0 0 8px;
+            `}
+          />
+        )
+        // : (
+        // <div
+        //   css={css`
+        //     position: absolute;
+        //     left: 0;
+        //     top: 0;
+        //     width: 6px;
+        //     background: #137333;
+        //     border-radius: 8px 0 0 8px;
+        //   `}
+        // />
+        // )
+      }
       <div
         css={css`
           height: 50px;
@@ -72,7 +78,6 @@ export const QuestionArea = () => {
         <QuestionTypeSelectBox />
       </div>
       <QuestionOption />
-      <AddOptionLine />
     </form>
   );
 };
