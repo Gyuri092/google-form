@@ -6,6 +6,7 @@ interface Props {
   readonly placeholder?: string;
   readonly defaultValue?: string;
   readonly inputStyle?: SerializedStyles;
+  readonly disabled?: boolean;
 }
 
 export const Input = (props: Props) => {
@@ -19,6 +20,7 @@ export const Input = (props: Props) => {
       `}
     >
       <input
+        disabled={props.disabled}
         type="text"
         name={props.name}
         css={css`
