@@ -29,7 +29,7 @@ export const DropDown = () => {
         <Input
           disabled
           placeholder="드롭다운"
-          name="defaultQuestion"
+          name="title"
           inputStyle={css`
             height: 30px;
             padding: 1px 1px 1px 0;

@@ -28,7 +28,7 @@ export const MultipleChoice = () => {
         />
         <Input
           defaultValue="옵션 1"
-          name="defaultQuestion"
+          name="contents"
           inputStyle={css`
             height: 30px;
             padding: 1px 1px 1px 0;

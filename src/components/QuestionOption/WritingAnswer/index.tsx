@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 export const WritingAnswer = (props: { questionType: string }) => {
   return (
     <input
+      name="title"
       css={css`
         width: ${props.questionType === 'long-sentence' ? '85%' : '50%'};
         height: 30px;

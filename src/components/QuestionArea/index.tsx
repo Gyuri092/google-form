@@ -1,15 +1,42 @@
 import { css } from '@emotion/react';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Questions } from '../../slice/questionSlice';
 import { Input } from '../Input';
 import { QuestionOption } from '../QuestionOption';
 import { QuestionTypeSelectBox } from '../QuestionTypeSelectBox';
+import { RootState } from '../../store';
 
-export const QuestionArea = () => {
+interface Props {
+  key: string;
+  value: Questions;
+}
+
+export const QuestionArea = (props: Props) => {
   const [isFocused, setIsFocused] = useState(true);
+  const formRef = useRef<HTMLFormElement>(null);
+  const questionType = useSelector(
+    (state: RootState) => state.questionType.value,
+  );
+
+  const submitForm = () => {
+    const { current: form } = formRef;
+    if (!form) return;
+    const formData = new FormData(form);
+    const payload = {
+      type: questionType,
+      title: formData.get('title'),
+      contents: formData.get('contents') ?? [],
+      isRequired: formData.get('is-required') === 'on',
+    };
+    console.log(payload);
+  };
+
   return (
     <form
+      key={props.key}
+      ref={formRef}
       css={css`
-        /* height: ${isFocused ? '323px' : '176px'}; */
         height: auto;
         border: 1px solid #dadce0;
         border-radius: 8px;
@@ -21,33 +48,23 @@ export const QuestionArea = () => {
       `}
       onFocus={() => setIsFocused(true)}
       onBlur={() => setIsFocused(false)}
+      onSubmit={(e) => {
+        e.preventDefault();
+        submitForm();
+      }}
     >
-      {
-        isFocused && (
-          <div
-            css={css`
-              position: absolute;
-              left: -1px;
-              top: 0;
-              width: 6px;
-              background: #4285f4;
-              border-radius: 8px 0 0 8px;
-            `}
-          />
-        )
-        // : (
-        // <div
-        //   css={css`
-        //     position: absolute;
-        //     left: 0;
-        //     top: 0;
-        //     width: 6px;
-        //     background: #137333;
-        //     border-radius: 8px 0 0 8px;
-        //   `}
-        // />
-        // )
-      }
+      {isFocused && (
+        <div
+          css={css`
+            position: absolute;
+            left: -1px;
+            top: 0;
+            width: 6px;
+            background: #4285f4;
+            border-radius: 8px 0 0 8px;
+          `}
+        />
+      )}
       <div
         css={css`
           height: 50px;
@@ -63,6 +80,7 @@ export const QuestionArea = () => {
         >
           <Input
             placeholder="질문"
+            name="title"
             inputStyle={css`
               font-size: 11pt;
               padding: 16px;
@@ -73,6 +91,7 @@ export const QuestionArea = () => {
                 }
               }
             `}
+            defaultValue={props.value.title}
           />
         </div>
         <QuestionTypeSelectBox />

@@ -29,7 +29,7 @@ export const CheckBox = () => {
         <Input
           disabled
           placeholder="체크박스"
-          name="defaultQuestion"
+          name="title"
           inputStyle={css`
             height: 30px;
             padding: 1px 1px 1px 0;
