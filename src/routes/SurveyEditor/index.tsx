@@ -1,8 +1,11 @@
 import { css } from '@emotion/react';
+import { useSelector } from 'react-redux';
 import { QuestionArea } from '../../components/QuestionArea';
 import { TitleArea } from '../../components/TitleArea';
+import { RootState } from '../../store';
 
 export const SurveyEditor = () => {
+  const questions = useSelector((state: RootState) => state.questions);
   return (
     <div
       css={css`
@@ -22,7 +25,9 @@ export const SurveyEditor = () => {
         `}
       >
         <TitleArea />
-        <QuestionArea />
+        {questions.map((item, index) => (
+          <QuestionArea key={`${item.type}-${index - 0}`} value={item} />
+        ))}
       </div>
     </div>
   );
