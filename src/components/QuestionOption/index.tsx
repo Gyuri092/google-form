@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { AddOptionLine } from '../AddOptionLine';
 import { ToolsBlock } from '../ToolsBlock';
-import { MultipleChoice } from './MultipleChoice';
+import { MultipleChoiceList } from './MultipleChoiceList';
 import { WritingAnswer } from './WritingAnswer';
 
 export const QuestionOption = () => {
@@ -15,7 +15,12 @@ export const QuestionOption = () => {
       questionType === 'check-box' ||
       questionType === 'drop-down';
     if (multipleChoice) {
-      return <MultipleChoice />;
+      return (
+        <>
+          <MultipleChoiceList />
+          <AddOptionLine />
+        </>
+      );
     }
     return <WritingAnswer questionType={questionType} />;
   };
@@ -23,9 +28,6 @@ export const QuestionOption = () => {
   return (
     <>
       {renderQuestion()}
-      {questionType !== 'short-answer' && questionType !== 'long-sentence' && (
-        <AddOptionLine />
-      )}
       <ToolsBlock />
     </>
   );
