@@ -18,7 +18,7 @@ export const QuestionArea = ({ value }: { value: Questions }) => {
   );
   const dispatch = useDispatch();
 
-  const submitForm = () => {
+  const copyQuestion = () => {
     const { current: form } = formRef;
     if (!form) return;
     const formData = new FormData(form);
@@ -53,7 +53,7 @@ export const QuestionArea = ({ value }: { value: Questions }) => {
       onBlur={() => setIsFocused(false)}
       onSubmit={(e) => {
         e.preventDefault();
-        submitForm();
+        copyQuestion();
       }}
     >
       {isFocused && (
