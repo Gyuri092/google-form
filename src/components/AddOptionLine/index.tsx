@@ -18,6 +18,7 @@ export const AddOptionLine = () => {
         height: auto;
         display: flex;
         align-items: center;
+        padding: 0 20px 0 24px;
       `}
     >
       <BiCircle

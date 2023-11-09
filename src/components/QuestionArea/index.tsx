@@ -42,8 +42,9 @@ export const QuestionArea = ({ value }: { value: Questions }) => {
         height: auto;
         border: 1px solid #dadce0;
         border-radius: 8px;
-        padding: 20px;
+        padding: 20px 20px 0 0;
         position: relative;
+        box-sizing: border-box;
         box-shadow: ${isFocused && '0 3px 3px rgba(0, 0, 0, 0.12)'},
           ${isFocused && '0 1px 1px rgba(0, 0, 0, 0.14)'},
           ${isFocused && '0 1px 2px rgba(0, 0, 0, 0.2)'};
@@ -73,6 +74,7 @@ export const QuestionArea = ({ value }: { value: Questions }) => {
           display: flex;
           justify-content: space-between;
           margin-bottom: 16px;
+          padding-left: 20px;
         `}
       >
         <div

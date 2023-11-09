@@ -10,11 +10,10 @@ export const ToolsBlock = () => {
   return (
     <div
       css={css`
-        width: 100%;
+        width: auto;
         height: 64px;
         border-top: 1px solid #dadce0;
-        margin-top: 24px;
-        padding: 0 24px 0 24px;
+        margin: 24px 0 0 20px;
       `}
     >
       <div

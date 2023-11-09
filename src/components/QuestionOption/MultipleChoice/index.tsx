@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { BiCircle } from 'react-icons/bi';
 import { CgClose } from 'react-icons/cg';
+import { RxDragHandleDots2 } from 'react-icons/rx';
 import { useDispatch, useSelector } from 'react-redux';
 import { Input } from '../../Input';
 import { RootState } from '../../../store';
@@ -28,13 +29,21 @@ export const MultipleChoice = () => {
               display: flex;
               align-items: center;
               margin-bottom: 16px;
-            `}
-          >
-            <BiCircle
-              css={css`
+              padding-left: 4px;
+              svg {
                 width: 24px;
                 height: 24px;
                 color: #dadce0;
+              }
+            `}
+          >
+            <RxDragHandleDots2
+              css={css`
+                cursor: move;
+              `}
+            />
+            <BiCircle
+              css={css`
                 margin-right: 8px;
               `}
             />
