@@ -47,56 +47,64 @@ export const MultipleChoice = () => {
                 font-size: 11pt;
               `}
             />
-            <button
-              type="button"
-              css={css`
-                width: 36px;
-                height: 32px;
-                border-radius: 50%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin-left: 20px;
-                position: relative;
-                :hover {
-                  background: #f3f3f3;
-                  p {
-                    opacity: 1;
-                  }
-                }
-                svg {
-                  width: 24px;
-                  height: 24px;
-                }
-                svg > path {
-                  fill: #5f6368;
-                }
-              `}
-              onClick={() => {
-                dispatch(removeOption(index));
-              }}
-            >
-              <CgClose />
-              <p
+            {index === 0 ? (
+              <div
                 css={css`
-                  width: 44px;
-                  height: 24px;
-                  font-size: 12px;
-                  color: #fff;
-                  background: rgba(0, 0, 0, 0.6);
-                  border-radius: 2px;
+                  width: 56px;
+                `}
+              />
+            ) : (
+              <button
+                type="button"
+                css={css`
+                  width: 36px;
+                  height: 32px;
+                  border-radius: 50%;
                   display: flex;
                   justify-content: center;
                   align-items: center;
-                  position: absolute;
-                  left: -6px;
-                  bottom: -24px;
-                  opacity: 0;
+                  margin-left: 20px;
+                  position: relative;
+                  :hover {
+                    background: #f3f3f3;
+                    p {
+                      opacity: 1;
+                    }
+                  }
+                  svg {
+                    width: 24px;
+                    height: 24px;
+                  }
+                  svg > path {
+                    fill: #5f6368;
+                  }
                 `}
+                onClick={() => {
+                  dispatch(removeOption(index));
+                }}
               >
-                삭제
-              </p>
-            </button>
+                <CgClose />
+                <p
+                  css={css`
+                    width: 44px;
+                    height: 24px;
+                    font-size: 12px;
+                    color: #fff;
+                    background: rgba(0, 0, 0, 0.6);
+                    border-radius: 2px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    position: absolute;
+                    left: -6px;
+                    bottom: -24px;
+                    opacity: 0;
+                  `}
+                >
+                  삭제
+                </p>
+              </button>
+            )}
           </label>
         );
       })}
