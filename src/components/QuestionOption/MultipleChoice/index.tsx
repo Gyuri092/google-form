@@ -45,6 +45,10 @@ export const MultipleChoice = () => {
                 height: 30px;
                 padding: 1px 1px 1px 0;
                 font-size: 11pt;
+                border-bottom: none;
+                :hover {
+                  border-bottom: 1px solid #dadce0;
+                }
               `}
             />
             {index === 0 ? (
