@@ -12,9 +12,13 @@ export const questionOptionSlice = createSlice({
     removeOption: (state, action: PayloadAction<number>) => {
       state.splice(action.payload, 1);
     },
+    updateOptions: (_, action: PayloadAction<string[]>) => {
+      return action.payload;
+    },
   },
 });
 
-export const { addOption, removeOption } = questionOptionSlice.actions;
+export const { addOption, removeOption, updateOptions } =
+  questionOptionSlice.actions;
 
 export default questionOptionSlice.reducer;
