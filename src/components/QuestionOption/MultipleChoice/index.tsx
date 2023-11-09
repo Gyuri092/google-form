@@ -39,6 +39,7 @@ export const MultipleChoice = () => {
             />
 
             <Input
+              disabled={option === '기타...'}
               defaultValue={option}
               name={`contents-${index + 1}`}
               inputStyle={css`
@@ -47,8 +48,11 @@ export const MultipleChoice = () => {
                 font-size: 11pt;
                 border-bottom: none;
                 :hover {
-                  border-bottom: 1px solid #dadce0;
+                  border-bottom: 1px
+                    ${option === '기타...' ? 'dotted' : 'solid'} #dadce0;
                 }
+                background: ${option === '기타...' && '#fff'};
+                color: ${option === '기타...' && '#70757a'};
               `}
             />
             {index === 0 ? (
