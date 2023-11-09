@@ -1,9 +1,13 @@
 import { css } from '@emotion/react';
 import { BiCircle } from 'react-icons/bi';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addOption } from '../../slice/questionOptionSlice';
+import { RootState } from '../../store';
 
 export const AddOptionLine = () => {
+  const questionOptions = useSelector(
+    (state: RootState) => state.questionOption,
+  );
   const dispatch = useDispatch();
   return (
     <label
@@ -45,7 +49,9 @@ export const AddOptionLine = () => {
               border-bottom: 1px solid #dadce0;
             }
           `}
-          onClick={() => dispatch(addOption())}
+          onClick={() =>
+            dispatch(addOption(`옵션 ${questionOptions.length + 1}`))
+          }
         >
           옵션 추가
         </button>

@@ -1,9 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { SelectedType } from './questionTypeSlice';
+import { createSlice } from '@reduxjs/toolkit';
 
 export interface Questions {
-  type: SelectedType['value'];
+  type: string;
   title: string;
   contents?: string[];
   isRequired: boolean;

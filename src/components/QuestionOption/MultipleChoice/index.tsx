@@ -1,14 +1,16 @@
 import { css } from '@emotion/react';
 import { BiCircle } from 'react-icons/bi';
 import { CgClose } from 'react-icons/cg';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Input } from '../../Input';
 import { RootState } from '../../../store';
+import { removeOption } from '../../../slice/questionOptionSlice';
 
 export const MultipleChoice = () => {
   const questionOptions = useSelector(
     (state: RootState) => state.questionOption,
   );
+  const dispatch = useDispatch();
   return (
     <div
       css={css`
@@ -37,7 +39,7 @@ export const MultipleChoice = () => {
             />
 
             <Input
-              defaultValue={`옵션 ${index + 1}`}
+              defaultValue={option}
               name={`contents-${index + 1}`}
               inputStyle={css`
                 height: 30px;
@@ -70,6 +72,9 @@ export const MultipleChoice = () => {
                   fill: #5f6368;
                 }
               `}
+              onClick={() => {
+                dispatch(removeOption(index));
+              }}
             >
               <CgClose />
               <p

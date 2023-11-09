@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { Questions } from '../../slice/questionSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { Questions, insertArray } from '../../slice/questionSlice';
 import { Input } from '../Input';
 import { QuestionOption } from '../QuestionOption';
 import { QuestionTypeSelectBox } from '../QuestionTypeSelectBox';
@@ -16,22 +16,23 @@ export const QuestionArea = ({ value }: { value: Questions }) => {
   const questionOptions = useSelector(
     (state: RootState) => state.questionOption,
   );
+  const dispatch = useDispatch();
 
   const submitForm = () => {
     const { current: form } = formRef;
     if (!form) return;
     const formData = new FormData(form);
-    const contents = questionOptions.map((_, index) =>
-      formData.get(`contents-${index + 1}`),
+    const contents = questionOptions.map(
+      (_, index) => formData.get(`contents-${index + 1}`) as string,
     );
 
     const payload = {
       type: questionType,
-      title: formData.get('title'),
+      title: formData.get('title') as string,
       contents: contents ?? [],
       isRequired: formData.get('is-required') === 'on',
     };
-    console.log(payload);
+    dispatch(insertArray(payload));
   };
 
   return (
