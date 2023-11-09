@@ -11,6 +11,7 @@ export const MultipleChoice = () => {
     (state: RootState) => state.questionOption,
   );
   const dispatch = useDispatch();
+
   return (
     <div
       css={css`
@@ -21,7 +22,7 @@ export const MultipleChoice = () => {
         return (
           <label
             key={`${option}-${index - 0}`}
-            htmlFor="defaultQuestion"
+            htmlFor={`contents-${index + 1}`}
             css={css`
               height: auto;
               display: flex;
