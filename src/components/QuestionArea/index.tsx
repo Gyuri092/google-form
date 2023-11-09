@@ -13,15 +13,22 @@ export const QuestionArea = ({ value }: { value: Questions }) => {
   const questionType = useSelector(
     (state: RootState) => state.questionType.value,
   );
+  const questionOptions = useSelector(
+    (state: RootState) => state.questionOption,
+  );
 
   const submitForm = () => {
     const { current: form } = formRef;
     if (!form) return;
     const formData = new FormData(form);
+    const contents = questionOptions.map((_, index) =>
+      formData.get(`contents-${index + 1}`),
+    );
+
     const payload = {
       type: questionType,
       title: formData.get('title'),
-      contents: formData.get('contents') ?? [],
+      contents: contents ?? [],
       isRequired: formData.get('is-required') === 'on',
     };
     console.log(payload);
