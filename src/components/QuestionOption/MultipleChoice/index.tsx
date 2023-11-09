@@ -18,7 +18,7 @@ export const MultipleChoice = () => {
       {questionOptions.map((option, index) => {
         return (
           <label
-            key={option}
+            key={`${option}-${index - 0}`}
             htmlFor="defaultQuestion"
             css={css`
               height: auto;
@@ -38,7 +38,7 @@ export const MultipleChoice = () => {
 
             <Input
               defaultValue={`옵션 ${index + 1}`}
-              name="contents"
+              name={`contents-${index + 1}`}
               inputStyle={css`
                 height: 30px;
                 padding: 1px 1px 1px 0;
