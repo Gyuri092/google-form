@@ -32,6 +32,7 @@ const reset = css`
   }
   body {
     line-height: 1;
+    background: #f0ebf8;
   }
   blockquote,
   q {

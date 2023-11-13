@@ -48,6 +48,8 @@ export const QuestionArea = ({ value }: { value: Questions }) => {
         box-shadow: ${isFocused && '0 3px 3px rgba(0, 0, 0, 0.12)'},
           ${isFocused && '0 1px 1px rgba(0, 0, 0, 0.14)'},
           ${isFocused && '0 1px 2px rgba(0, 0, 0, 0.2)'};
+        background: #fff;
+        margin-bottom: 20px;
       `}
       onFocus={() => setIsFocused(true)}
       onBlur={() => setIsFocused(false)}

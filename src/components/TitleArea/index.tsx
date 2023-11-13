@@ -10,6 +10,8 @@ export const TitleArea = () => {
         height: auto;
         position: relative;
         margin-bottom: 14px;
+        background: #fff;
+        border-radius: 8px;
       `}
       onFocus={() => setIsFocused(true)}
       onBlur={() => setIsFocused(false)}
