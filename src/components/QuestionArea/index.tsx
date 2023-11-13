@@ -1,20 +1,26 @@
 import { css } from '@emotion/react';
 import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Questions, insertArray } from '../../slice/questionSlice';
+import { Questions, insertQuestion } from '../../slice/questionSlice';
 import { Input } from '../Input';
 import { QuestionOption } from '../QuestionOption';
 import { QuestionTypeSelectBox } from '../QuestionTypeSelectBox';
 import { RootState } from '../../store';
 
-export const QuestionArea = ({ value }: { value: Questions }) => {
+export const QuestionArea = ({
+  value,
+  questionIndex,
+}: {
+  value: Questions;
+  questionIndex: number;
+}) => {
   const [isFocused, setIsFocused] = useState(true);
   const formRef = useRef<HTMLFormElement>(null);
   const questionType = useSelector(
     (state: RootState) => state.questionType.value,
   );
   const questionOptions = useSelector(
-    (state: RootState) => state.questionOption,
+    (state: RootState) => state.questions[questionIndex]?.contents || [],
   );
   const dispatch = useDispatch();
 
@@ -27,12 +33,13 @@ export const QuestionArea = ({ value }: { value: Questions }) => {
     );
 
     const payload = {
+      id: questionIndex,
       type: questionType,
       title: formData.get('title') as string,
       contents: contents ?? [],
       isRequired: formData.get('is-required') === 'on',
     };
-    dispatch(insertArray(payload));
+    dispatch(insertQuestion(payload));
   };
 
   return (
@@ -102,7 +109,7 @@ export const QuestionArea = ({ value }: { value: Questions }) => {
         </div>
         <QuestionTypeSelectBox />
       </div>
-      <QuestionOption />
+      <QuestionOption questionIndex={questionIndex} />
     </form>
   );
 };

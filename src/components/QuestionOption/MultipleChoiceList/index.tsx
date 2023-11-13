@@ -6,11 +6,15 @@ import { useRef } from 'react';
 import { RootState } from '../../../store';
 import { Input } from '../../Input';
 import { OptionDeleteButton } from '../../Button/OptionDeleteButton';
-import { updateOptions } from '../../../slice/questionOptionSlice';
+import { updateOptions } from '../../../slice/questionSlice';
 
-export const MultipleChoiceList = () => {
+export const MultipleChoiceList = ({
+  questionIndex,
+}: {
+  questionIndex: number;
+}) => {
   const questionOptions = useSelector(
-    (state: RootState) => state.questionOption,
+    (state: RootState) => state.questions[questionIndex]?.contents || [],
   );
   const dispatch = useDispatch();
   const dragItem = useRef<number | null>(null);
@@ -33,7 +37,9 @@ export const MultipleChoiceList = () => {
     tempQuestionOptions.splice(dragOverItem.current ?? 0, 0, dragItemContent);
     dragItem.current = null;
     dragOverItem.current = null;
-    dispatch(updateOptions(tempQuestionOptions));
+    dispatch(
+      updateOptions({ id: questionIndex + 1, options: tempQuestionOptions }),
+    );
   };
 
   return (
@@ -100,7 +106,7 @@ export const MultipleChoiceList = () => {
                 `}
               />
             ) : (
-              <OptionDeleteButton index={index} />
+              <OptionDeleteButton questionIndex={questionIndex} index={index} />
             )}
           </label>
         );

@@ -5,7 +5,11 @@ import { ToolsBlock } from '../ToolsBlock';
 import { MultipleChoiceList } from './MultipleChoiceList';
 import { WritingAnswer } from './WritingAnswer';
 
-export const QuestionOption = () => {
+export const QuestionOption = ({
+  questionIndex,
+}: {
+  questionIndex: number;
+}) => {
   const questionType = useSelector(
     (state: RootState) => state.questionType.value,
   );
@@ -17,8 +21,8 @@ export const QuestionOption = () => {
     if (multipleChoice) {
       return (
         <>
-          <MultipleChoiceList />
-          <AddOptionLine />
+          <MultipleChoiceList questionIndex={questionIndex} />
+          <AddOptionLine questionIndex={questionIndex} />
         </>
       );
     }
@@ -28,7 +32,7 @@ export const QuestionOption = () => {
   return (
     <>
       {renderQuestion()}
-      <ToolsBlock />
+      <ToolsBlock questionIndex={questionIndex} />
     </>
   );
 };

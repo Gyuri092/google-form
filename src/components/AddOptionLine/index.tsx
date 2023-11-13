@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 import { BiCircle } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
-import { addOption } from '../../slice/questionOptionSlice';
 import { RootState } from '../../store';
+import { addOption } from '../../slice/questionSlice';
 
-export const AddOptionLine = () => {
+export const AddOptionLine = ({ questionIndex }: { questionIndex: number }) => {
   const questionOptions = useSelector(
-    (state: RootState) => state.questionOption,
+    (state: RootState) => state.questions[questionIndex]?.contents || [],
   );
   const dispatch = useDispatch();
 
@@ -53,7 +53,12 @@ export const AddOptionLine = () => {
             }
           `}
           onClick={() =>
-            dispatch(addOption(`옵션 ${questionOptions.length + 1}`))
+            dispatch(
+              addOption({
+                id: questionIndex + 1,
+                option: `옵션 ${questionOptions.length + 1}`,
+              }),
+            )
           }
         >
           옵션 추가
@@ -81,7 +86,11 @@ export const AddOptionLine = () => {
                   background: #f8faff;
                 }
               `}
-              onClick={() => dispatch(addOption('기타...'))}
+              onClick={() =>
+                dispatch(
+                  addOption({ id: questionIndex + 1, option: '기타...' }),
+                )
+              }
             >{`'기타' 추가`}</button>
           </>
         )}

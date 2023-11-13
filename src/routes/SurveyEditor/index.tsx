@@ -26,7 +26,11 @@ export const SurveyEditor = () => {
       >
         <TitleArea />
         {questions.map((item, index) => (
-          <QuestionArea key={`${item.title}-${index - 0}`} value={item} />
+          <QuestionArea
+            key={`${item.title}-${index - 0}`}
+            value={item}
+            questionIndex={index}
+          />
         ))}
       </div>
     </div>

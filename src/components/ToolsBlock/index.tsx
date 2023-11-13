@@ -2,11 +2,13 @@ import { css } from '@emotion/react';
 import { useState } from 'react';
 import { CgTrash } from 'react-icons/cg';
 import { MdContentCopy } from 'react-icons/md';
+import { useDispatch } from 'react-redux';
+import { removeQuestion } from '../../slice/questionSlice';
 
-export const ToolsBlock = () => {
+export const ToolsBlock = ({ questionIndex }: { questionIndex: number }) => {
   const [hoverItem, setHoverItem] = useState('');
   const [isRequired, setIsRequired] = useState(false);
-
+  const dispatch = useDispatch();
   return (
     <div
       css={css`
@@ -62,6 +64,7 @@ export const ToolsBlock = () => {
             onMouseOut={() => setHoverItem('')}
             onFocus={() => setHoverItem('delete')}
             onBlur={() => setHoverItem('')}
+            onClick={() => dispatch(removeQuestion(questionIndex))}
           >
             <CgTrash />
           </button>
