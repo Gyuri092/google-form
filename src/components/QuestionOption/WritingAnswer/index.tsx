@@ -7,8 +7,8 @@ export const WritingAnswer = (props: { questionType: string }) => {
       css={css`
         width: ${props.questionType === 'long-sentence' ? '85%' : '50%'};
         height: 30px;
-        padding: 1px 1px 1px 0;
-        margin-bottom: 24px;
+        padding: 1px 1px 1px 2px;
+        margin: 0 0 24px 20px;
         border-bottom: 1px dotted #70757a;
         font-size: 14px;
         font-weight: 400;

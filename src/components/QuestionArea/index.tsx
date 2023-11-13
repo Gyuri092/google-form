@@ -16,11 +16,12 @@ export const QuestionArea = ({
 }) => {
   const [isFocused, setIsFocused] = useState(true);
   const formRef = useRef<HTMLFormElement>(null);
-  const questionType = useSelector(
-    (state: RootState) => state.questionType.value,
-  );
   const questionOptions = useSelector(
     (state: RootState) => state.questions[questionIndex]?.contents || [],
+  );
+  const questionType = useSelector(
+    (state: RootState) =>
+      state.questions[questionIndex]?.type || 'multiple-choice-questions',
   );
   const dispatch = useDispatch();
 
@@ -107,7 +108,7 @@ export const QuestionArea = ({
             defaultValue={value.title}
           />
         </div>
-        <QuestionTypeSelectBox />
+        <QuestionTypeSelectBox questionIndex={questionIndex} />
       </div>
       <QuestionOption questionIndex={questionIndex} />
     </form>

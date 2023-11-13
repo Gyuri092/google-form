@@ -12,7 +12,7 @@ export interface Questions {
 const initialState: Questions[] = [
   {
     id: 1,
-    type: 'multiple-choice-questions',
+    type: '',
     title: '',
     contents: ['옵션 1'],
     isRequired: false,
@@ -23,6 +23,13 @@ export const questionSlice = createSlice({
   name: 'questions',
   initialState,
   reducers: {
+    changeQuestionType: (
+      state,
+      action: PayloadAction<{ id: number; type: string }>,
+    ) => {
+      const { id, type } = action.payload;
+      return state.map((q) => (q.id === id ? { ...q, type } : q));
+    },
     insertQuestion: (state, action: PayloadAction<Questions>) => {
       const id = state.length + 1;
       state.push({ ...action.payload, id });
@@ -61,6 +68,7 @@ export const questionSlice = createSlice({
 });
 
 export const {
+  changeQuestionType,
   insertQuestion,
   removeQuestion,
   addOption,

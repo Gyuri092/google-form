@@ -11,7 +11,8 @@ export const QuestionOption = ({
   questionIndex: number;
 }) => {
   const questionType = useSelector(
-    (state: RootState) => state.questionType.value,
+    (state: RootState) =>
+      state.questions[questionIndex]?.type || 'multiple-choice-questions',
   );
   const renderQuestion = () => {
     const multipleChoice =

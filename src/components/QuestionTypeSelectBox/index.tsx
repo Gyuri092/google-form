@@ -1,9 +1,15 @@
 import { css } from '@emotion/react';
-import { useDispatch } from 'react-redux';
-import { change } from '../../slice/questionTypeSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import { changeQuestionType } from '../../slice/questionSlice';
 
-export const QuestionTypeSelectBox = () => {
+export const QuestionTypeSelectBox = ({
+  questionIndex,
+}: {
+  questionIndex: number;
+}) => {
   const dispatch = useDispatch();
+  const questions = useSelector((state: RootState) => state.questions);
   return (
     <select
       name="question-option"
@@ -17,8 +23,12 @@ export const QuestionTypeSelectBox = () => {
         padding: 8px 48px;
         outline: none;
       `}
-      defaultValue="multiple-choice-questions"
-      onChange={(e) => dispatch(change(e.target.value))}
+      value={questions[questionIndex]?.type || 'multiple-choice-questions'}
+      onChange={(e) =>
+        dispatch(
+          changeQuestionType({ id: questionIndex + 1, type: e.target.value }),
+        )
+      }
     >
       <option value="short-answer">단답형</option>
       <option value="long-sentence">장문형</option>
