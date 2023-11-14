@@ -12,7 +12,7 @@ export interface Questions {
 const initialState: Questions[] = [
   {
     id: 1,
-    type: '',
+    type: 'multiple-choice-questions',
     title: '',
     contents: ['옵션 1'],
     isRequired: false,
@@ -57,12 +57,22 @@ export const questionSlice = createSlice({
           : q,
       );
     },
+    updateRequired: (
+      state,
+      action: PayloadAction<{ id: number; isRequired: boolean }>,
+    ) => {
+      const { id, isRequired } = action.payload;
+      return state.map((q) => (q.id === id ? { ...q, isRequired } : q));
+    },
     updateOptions: (
       state,
       action: PayloadAction<{ id: number; options: string[] }>,
     ) => {
       const { id, options } = action.payload;
       return state.map((q) => (q.id === id ? { ...q, contents: options } : q));
+    },
+    updateQuestions: (_, action: PayloadAction<Questions[]>) => {
+      return action.payload;
     },
   },
 });
@@ -73,7 +83,9 @@ export const {
   removeQuestion,
   addOption,
   removeOption,
+  updateRequired,
   updateOptions,
+  updateQuestions,
 } = questionSlice.actions;
 
 export default questionSlice.reducer;

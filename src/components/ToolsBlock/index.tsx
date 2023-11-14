@@ -2,12 +2,15 @@ import { css } from '@emotion/react';
 import { useState } from 'react';
 import { CgTrash } from 'react-icons/cg';
 import { MdContentCopy } from 'react-icons/md';
-import { useDispatch } from 'react-redux';
-import { removeQuestion } from '../../slice/questionSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeQuestion, updateRequired } from '../../slice/questionSlice';
+import { RootState } from '../../store';
 
 export const ToolsBlock = ({ questionIndex }: { questionIndex: number }) => {
   const [hoverItem, setHoverItem] = useState('');
-  const [isRequired, setIsRequired] = useState(false);
+  const isRequired = useSelector(
+    (state: RootState) => state.questions[questionIndex]?.isRequired ?? false,
+  );
   const dispatch = useDispatch();
   return (
     <div
@@ -111,7 +114,7 @@ export const ToolsBlock = ({ questionIndex }: { questionIndex: number }) => {
             }
             div {
               cursor: pointer;
-              background-color: ${!isRequired ? '#e1d8f1' : '#b9b9b9'};
+              background-color: ${isRequired ? '#e1d8f1' : '#b9b9b9'};
               transition: 0.4s;
               border-radius: 34px;
               :before {
@@ -120,14 +123,12 @@ export const ToolsBlock = ({ questionIndex }: { questionIndex: number }) => {
                 content: '';
                 height: 20px;
                 width: 20px;
-                right: 20px;
+                left: 40px;
                 bottom: -4px;
-                border: 1px solid ${!isRequired ? '#e1d8f1' : '#b9b9b9'};
-                background-color: ${!isRequired ? '#673ab7' : '#fff'};
+                border: 1px solid ${isRequired ? '#e1d8f1' : '#b9b9b9'};
+                background-color: ${isRequired ? '#673ab7' : '#fff'};
                 transition: 0.4s;
-                transform: ${!isRequired
-                  ? 'translateX(20px)'
-                  : 'translateX(0)'};
+                transform: ${isRequired ? 'translateX(20px)' : 'translateX(0)'};
               }
             }
           `}
@@ -142,8 +143,15 @@ export const ToolsBlock = ({ questionIndex }: { questionIndex: number }) => {
           <input
             type="checkbox"
             name="is-required"
-            checked={!isRequired}
-            onChange={() => setIsRequired((prev) => !prev)}
+            checked={isRequired}
+            onChange={() =>
+              dispatch(
+                updateRequired({
+                  id: questionIndex + 1,
+                  isRequired: !isRequired,
+                }),
+              )
+            }
           />
           <div />
         </label>
