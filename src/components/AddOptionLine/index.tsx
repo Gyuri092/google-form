@@ -5,9 +5,12 @@ import { RootState } from '../../store';
 import { addOption } from '../../slice/questionSlice';
 
 export const AddOptionLine = ({ questionIndex }: { questionIndex: number }) => {
-  const questionOptions = useSelector(
-    (state: RootState) => state.questions[questionIndex]?.contents || [],
+  const questions = useSelector(
+    (state: RootState) => state.questions[questionIndex],
   );
+  const questionOptions = questions?.contents || [];
+  const id = questions?.id || 1;
+
   const dispatch = useDispatch();
 
   const isIncludedOthers = questionOptions.includes('기타...');
@@ -55,7 +58,7 @@ export const AddOptionLine = ({ questionIndex }: { questionIndex: number }) => {
           onClick={() =>
             dispatch(
               addOption({
-                id: questionIndex + 1,
+                id,
                 option: `옵션 ${questionOptions.length + 1}`,
               }),
             )
@@ -86,11 +89,7 @@ export const AddOptionLine = ({ questionIndex }: { questionIndex: number }) => {
                   background: #f8faff;
                 }
               `}
-              onClick={() =>
-                dispatch(
-                  addOption({ id: questionIndex + 1, option: '기타...' }),
-                )
-              }
+              onClick={() => dispatch(addOption({ id, option: '기타...' }))}
             >{`'기타' 추가`}</button>
           </>
         )}

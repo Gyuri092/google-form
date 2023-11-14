@@ -8,9 +8,11 @@ import { RootState } from '../../store';
 
 export const ToolsBlock = ({ questionIndex }: { questionIndex: number }) => {
   const [hoverItem, setHoverItem] = useState('');
-  const isRequired = useSelector(
-    (state: RootState) => state.questions[questionIndex]?.isRequired ?? false,
+  const questions = useSelector(
+    (state: RootState) => state.questions[questionIndex],
   );
+  const id = questions?.id || 1;
+  const isRequired = questions?.isRequired ?? false;
   const dispatch = useDispatch();
   return (
     <div
@@ -67,7 +69,7 @@ export const ToolsBlock = ({ questionIndex }: { questionIndex: number }) => {
             onMouseOut={() => setHoverItem('')}
             onFocus={() => setHoverItem('delete')}
             onBlur={() => setHoverItem('')}
-            onClick={() => dispatch(removeQuestion(questionIndex))}
+            onClick={() => dispatch(removeQuestion(id))}
           >
             <CgTrash />
           </button>
@@ -147,7 +149,7 @@ export const ToolsBlock = ({ questionIndex }: { questionIndex: number }) => {
             onChange={() =>
               dispatch(
                 updateRequired({
-                  id: questionIndex + 1,
+                  id,
                   isRequired: !isRequired,
                 }),
               )

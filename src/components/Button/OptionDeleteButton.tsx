@@ -1,7 +1,8 @@
 import { css } from '@emotion/react';
 import { CgClose } from 'react-icons/cg';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { removeOption } from '../../slice/questionSlice';
+import { RootState } from '../../store';
 
 export const OptionDeleteButton = ({
   questionIndex,
@@ -11,6 +12,10 @@ export const OptionDeleteButton = ({
   index: number;
 }) => {
   const dispatch = useDispatch();
+  const questions = useSelector(
+    (state: RootState) => state.questions[questionIndex],
+  );
+  const id = questions?.id || 1;
   return (
     <button
       type="button"
@@ -38,7 +43,7 @@ export const OptionDeleteButton = ({
         }
       `}
       onClick={() => {
-        dispatch(removeOption({ id: questionIndex + 1, index }));
+        dispatch(removeOption({ id, index }));
       }}
     >
       <CgClose />

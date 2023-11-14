@@ -13,9 +13,11 @@ export const MultipleChoiceList = ({
 }: {
   questionIndex: number;
 }) => {
-  const questionOptions = useSelector(
-    (state: RootState) => state.questions[questionIndex]?.contents || [],
+  const questions = useSelector(
+    (state: RootState) => state.questions[questionIndex],
   );
+  const questionOptions = questions?.contents || [];
+  const id = questions?.id || 1;
   const dispatch = useDispatch();
   const dragItem = useRef<number | null>(null);
   const dragOverItem = useRef<number | null>(null);
@@ -37,9 +39,7 @@ export const MultipleChoiceList = ({
     tempQuestionOptions.splice(dragOverItem.current ?? 0, 0, dragItemContent);
     dragItem.current = null;
     dragOverItem.current = null;
-    dispatch(
-      updateOptions({ id: questionIndex + 1, options: tempQuestionOptions }),
-    );
+    dispatch(updateOptions({ id, options: tempQuestionOptions }));
   };
 
   return (
