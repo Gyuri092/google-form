@@ -85,7 +85,7 @@ export const MultipleChoiceList = ({
 
             <Input
               disabled={isOthers}
-              defaultValue={option}
+              defaultValue={option ?? `옵션 ${index + 1}`}
               name={`contents-${index + 1}`}
               inputStyle={css`
                 height: 30px;
