@@ -28,7 +28,15 @@ export const questionSlice = createSlice({
       action: PayloadAction<{ id: number; type: string }>,
     ) => {
       const { id, type } = action.payload;
-      return state.map((q) => (q.id === id ? { ...q, type } : q));
+      const multipleChoice =
+        type === 'multiple-choice-questions' ||
+        type === 'check-box' ||
+        type === 'drop-down';
+      if (multipleChoice)
+        return state.map((q) =>
+          q.id === id ? { ...q, type, contents: ['옵션 1'] } : q,
+        );
+      return state.map((q) => (q.id === id ? { ...q, type, contents: [] } : q));
     },
     insertQuestion: (state, action: PayloadAction<Questions>) => {
       const id = state.length + 1;
