@@ -5,11 +5,11 @@ import { RootState } from '../../store';
 import { addOption } from '../../slice/questionSlice';
 
 export const AddOptionLine = ({ questionIndex }: { questionIndex: number }) => {
-  const questions = useSelector(
+  const question = useSelector(
     (state: RootState) => state.questions[questionIndex],
   );
-  const questionOptions = questions?.contents || [];
-  const id = questions?.id || 1;
+  const questionOptions = question?.contents || [];
+  const id = question?.id || 1;
 
   const dispatch = useDispatch();
 

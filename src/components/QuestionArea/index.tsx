@@ -44,7 +44,7 @@ export const QuestionArea = () => {
       questions[questionIndex]?.contents ||
       [].map((_, index) => formData.get(`contents-${index + 1}`) as string);
     const payload = {
-      id: questionIndex + 1,
+      id: 1,
       type: questions[questionIndex]?.type || 'multiple-choice-questions',
       title: formData.get('title') as string,
       contents: contents ?? [],

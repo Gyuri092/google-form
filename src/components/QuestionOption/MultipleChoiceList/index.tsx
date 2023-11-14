@@ -13,11 +13,11 @@ export const MultipleChoiceList = ({
 }: {
   questionIndex: number;
 }) => {
-  const questions = useSelector(
+  const question = useSelector(
     (state: RootState) => state.questions[questionIndex],
   );
-  const questionOptions = questions?.contents || [];
-  const id = questions?.id || 1;
+  const questionOptions = question?.contents || [];
+  const id = question?.id || 1;
   const dispatch = useDispatch();
   const dragItem = useRef<number | null>(null);
   const dragOverItem = useRef<number | null>(null);

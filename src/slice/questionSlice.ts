@@ -35,7 +35,7 @@ export const questionSlice = createSlice({
       state.push({ ...action.payload, id });
     },
     removeQuestion: (state, action: PayloadAction<number>) => {
-      return state.filter((_, index) => index !== action.payload);
+      return state.filter((q) => q.id !== action.payload);
     },
     addOption: (
       state,

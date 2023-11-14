@@ -12,10 +12,10 @@ export const OptionDeleteButton = ({
   index: number;
 }) => {
   const dispatch = useDispatch();
-  const questions = useSelector(
+  const question = useSelector(
     (state: RootState) => state.questions[questionIndex],
   );
-  const id = questions?.id || 1;
+  const id = question?.id || 1;
   return (
     <button
       type="button"

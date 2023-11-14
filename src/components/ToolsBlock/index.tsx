@@ -8,11 +8,11 @@ import { RootState } from '../../store';
 
 export const ToolsBlock = ({ questionIndex }: { questionIndex: number }) => {
   const [hoverItem, setHoverItem] = useState('');
-  const questions = useSelector(
+  const question = useSelector(
     (state: RootState) => state.questions[questionIndex],
   );
-  const id = questions?.id || 1;
-  const isRequired = questions?.isRequired ?? false;
+  const id = question?.id || 1;
+  const isRequired = question?.isRequired ?? false;
   const dispatch = useDispatch();
   return (
     <div
