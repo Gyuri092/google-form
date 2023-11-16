@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
+import { useRef } from 'react';
 import { BiCircle } from 'react-icons/bi';
 import { RxDragHandleDots2 } from 'react-icons/rx';
 import { useDispatch, useSelector } from 'react-redux';
-import { useRef } from 'react';
-import { RootState } from '../../../store';
-import { Input } from '../../Input';
-import { OptionDeleteButton } from '../../Button/OptionDeleteButton';
 import { updateOptions } from '../../../slice/questionSlice';
+import { RootState } from '../../../store';
+import { OptionDeleteButton } from '../../Button/OptionDeleteButton';
+import { Input } from '../../Input';
 
 export const MultipleChoiceList = ({
   questionIndex,
@@ -69,7 +69,10 @@ export const MultipleChoiceList = ({
             draggable
             onDragStart={() => dragStart(index)}
             onDragEnter={() => dragEnter(index)}
-            onDragEnd={drop}
+            onDragEnd={(e) => {
+              e.stopPropagation();
+              drop();
+            }}
             onDragOver={(e) => e.preventDefault()}
           >
             <RxDragHandleDots2
