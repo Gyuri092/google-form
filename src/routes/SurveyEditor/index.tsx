@@ -1,11 +1,13 @@
 import { css } from '@emotion/react';
 import { QuestionArea } from '../../components/QuestionArea';
 import { TitleArea } from '../../components/TitleArea';
+import { QuestionAddButton } from '../../components/Button/QuestionAddButton';
 
 export const SurveyEditor = () => {
   return (
     <div
       css={css`
+        height: auto;
         display: flex;
         justify-content: center;
         padding: 50px 0;
@@ -24,6 +26,7 @@ export const SurveyEditor = () => {
         <TitleArea />
         <QuestionArea />
       </div>
+      <QuestionAddButton />
     </div>
   );
 };
