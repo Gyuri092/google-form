@@ -1,32 +1,36 @@
 import { css } from '@emotion/react';
+import { QuestionAddButton } from '../../components/Button/QuestionAddButton';
 import { QuestionArea } from '../../components/QuestionArea';
 import { TitleArea } from '../../components/TitleArea';
-import { QuestionAddButton } from '../../components/Button/QuestionAddButton';
+import { Header } from '../../components/Header';
 
 export const SurveyEditor = () => {
   return (
-    <div
-      css={css`
-        height: auto;
-        display: flex;
-        justify-content: center;
-        padding: 50px 0;
-      `}
-    >
+    <>
+      <Header />
       <div
         css={css`
-          width: 770px;
+          height: auto;
           display: flex;
-          flex-direction: column;
-          @media (max-width: 771px) {
-            width: 100%;
-          }
+          justify-content: center;
+          padding: 50px 0;
         `}
       >
-        <TitleArea />
-        <QuestionArea />
+        <div
+          css={css`
+            width: 770px;
+            display: flex;
+            flex-direction: column;
+            @media (max-width: 771px) {
+              width: 100%;
+            }
+          `}
+        >
+          <TitleArea />
+          <QuestionArea />
+        </div>
+        <QuestionAddButton />
       </div>
-      <QuestionAddButton />
-    </div>
+    </>
   );
 };

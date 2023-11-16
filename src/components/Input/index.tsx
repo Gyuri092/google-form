@@ -7,6 +7,7 @@ interface Props {
   readonly placeholder?: string;
   readonly defaultValue?: string;
   readonly inputStyle?: SerializedStyles;
+  readonly borderStyle?: SerializedStyles;
   readonly disabled?: boolean;
 }
 
@@ -56,6 +57,7 @@ export const Input = (props: Props) => {
                 transform: scaleX(1);
               }
             }
+            ${props.borderStyle}
           `}
         />
       )}
