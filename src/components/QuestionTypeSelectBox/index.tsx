@@ -10,6 +10,7 @@ export const QuestionTypeSelectBox = ({
 }) => {
   const dispatch = useDispatch();
   const questions = useSelector((state: RootState) => state.questions);
+  const id = questions[questionIndex]?.id || 1;
   return (
     <select
       name="question-option"
@@ -25,9 +26,7 @@ export const QuestionTypeSelectBox = ({
       `}
       value={questions[questionIndex]?.type || 'multiple-choice-questions'}
       onChange={(e) =>
-        dispatch(
-          changeQuestionType({ id: questionIndex + 1, type: e.target.value }),
-        )
+        dispatch(changeQuestionType({ id, type: e.target.value }))
       }
     >
       <option value="short-answer">단답형</option>
