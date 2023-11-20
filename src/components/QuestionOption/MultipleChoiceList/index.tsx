@@ -1,12 +1,11 @@
 import { css } from '@emotion/react';
 import { useRef } from 'react';
-import { BiCircle } from 'react-icons/bi';
 import { RxDragHandleDots2 } from 'react-icons/rx';
-import { FaRegSquare } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateOptions } from '../../../slice/questionSlice';
 import { RootState } from '../../../store';
 import { OptionDeleteButton } from '../../Button/OptionDeleteButton';
+import { IndexIcon } from '../../Icon/IndexIcon';
 import { Input } from '../../Input';
 
 export const MultipleChoiceList = ({
@@ -41,32 +40,6 @@ export const MultipleChoiceList = ({
     dragItem.current = null;
     dragOverItem.current = null;
     dispatch(updateOptions({ id, options: tempQuestionOptions }));
-  };
-
-  const renderIcon = () => {
-    switch (question?.type) {
-      case 'multiple-choice-questions':
-        return (
-          <BiCircle
-            css={css`
-              margin-right: 8px;
-            `}
-          />
-        );
-
-      case 'check-box':
-        return (
-          <FaRegSquare
-            css={css`
-              margin-right: 8px;
-            `}
-          />
-        );
-      case 'drop-down':
-        break;
-      default:
-        return null;
-    }
   };
 
   return (
@@ -107,19 +80,8 @@ export const MultipleChoiceList = ({
                 cursor: move;
               `}
             />
-            {question?.type === 'multiple-choice-questions' ? (
-              <BiCircle
-                css={css`
-                  margin-right: 8px;
-                `}
-              />
-            ) : (
-              <FaRegSquare
-                css={css`
-                  margin-right: 8px;
-                `}
-              />
-            )}
+
+            <IndexIcon questionIndex={questionIndex} index={index} />
 
             <Input
               disabled={isOthers}

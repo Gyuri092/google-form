@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
 import { changeQuestionType } from '../../slice/questionSlice';
+import { RootState } from '../../store';
 
 export const QuestionTypeSelectBox = ({
   questionIndex,

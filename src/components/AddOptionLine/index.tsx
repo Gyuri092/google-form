@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
-import { BiCircle } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
 import { addOption } from '../../slice/questionSlice';
+import { RootState } from '../../store';
+import { IndexIcon } from '../Icon/IndexIcon';
 
 export const AddOptionLine = ({ questionIndex }: { questionIndex: number }) => {
   const question = useSelector(
@@ -24,14 +24,7 @@ export const AddOptionLine = ({ questionIndex }: { questionIndex: number }) => {
         padding: 0 20px 0 24px;
       `}
     >
-      <BiCircle
-        css={css`
-          width: 24px;
-          height: 24px;
-          color: #dadce0;
-          margin-right: 8px;
-        `}
-      />
+      <IndexIcon questionIndex={questionIndex} index={questionOptions.length} />
       <div
         css={css`
           display: flex;
