@@ -13,6 +13,7 @@ export const AddOptionLine = ({ questionIndex }: { questionIndex: number }) => {
 
   const dispatch = useDispatch();
 
+  const isDropDown = question?.type === 'drop-down';
   const isIncludedOthers = questionOptions.includes('기타...');
   return (
     <label
@@ -59,7 +60,7 @@ export const AddOptionLine = ({ questionIndex }: { questionIndex: number }) => {
         >
           옵션 추가
         </button>
-        {isIncludedOthers ? null : (
+        {isIncludedOthers || isDropDown ? null : (
           <>
             <span
               css={css`

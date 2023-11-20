@@ -15,6 +15,7 @@ export const Header = () => {
     >
       <div
         css={css`
+          width: 300px;
           height: 80px;
           display: flex;
           align-items: center;
@@ -44,7 +45,7 @@ export const Header = () => {
         <button
           type="button"
           css={css`
-            width: 54px;
+            width: 80px;
             height: 50px;
             border-radius: 50%;
             display: flex;
