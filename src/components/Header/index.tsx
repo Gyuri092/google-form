@@ -1,6 +1,7 @@
-import { MdOutlineRemoveRedEye } from 'react-icons/md';
-import { IoDocumentTextSharp } from 'react-icons/io5';
 import { css } from '@emotion/react';
+import { IoDocumentTextSharp } from 'react-icons/io5';
+import { MdOutlineRemoveRedEye } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 import { Input } from '../Input';
 
 export const Header = () => {
@@ -42,7 +43,8 @@ export const Header = () => {
             background: #000;
           `}
         />
-        <button
+        <Link
+          to="/preview"
           type="button"
           css={css`
             width: 80px;
@@ -55,7 +57,7 @@ export const Header = () => {
               background: #f3f3f3;
             }
           `}
-          onClick={() => {}}
+          target="_blank"
         >
           <MdOutlineRemoveRedEye
             css={css`
@@ -64,7 +66,7 @@ export const Header = () => {
               fill: #5f6368;
             `}
           />
-        </button>
+        </Link>
       </div>
       <div
         css={css`
