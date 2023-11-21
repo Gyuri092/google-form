@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { useRef } from 'react';
 import { RxDragHandleDots2 } from 'react-icons/rx';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateOptions } from '../../../slice/questionSlice';
+import { updateQuestion } from '../../../slice/questionSlice';
 import { RootState } from '../../../store';
 import { OptionDeleteButton } from '../../Button/OptionDeleteButton';
 import { IndexIcon } from '../../Icon/IndexIcon';
@@ -39,7 +39,7 @@ export const MultipleChoiceList = ({
     tempQuestionOptions.splice(dragOverItem.current ?? 0, 0, dragItemContent);
     dragItem.current = null;
     dragOverItem.current = null;
-    dispatch(updateOptions({ id, options: tempQuestionOptions }));
+    dispatch(updateQuestion({ id, options: tempQuestionOptions }));
   };
 
   return (

@@ -65,19 +65,27 @@ export const questionSlice = createSlice({
           : q,
       );
     },
-    updateRequired: (
+    updateQuestion: (
       state,
-      action: PayloadAction<{ id: number; isRequired: boolean }>,
+      action: PayloadAction<{
+        id: number;
+        isRequired?: boolean;
+        options?: string[];
+        title?: string;
+      }>,
     ) => {
-      const { id, isRequired } = action.payload;
-      return state.map((q) => (q.id === id ? { ...q, isRequired } : q));
-    },
-    updateOptions: (
-      state,
-      action: PayloadAction<{ id: number; options: string[] }>,
-    ) => {
-      const { id, options } = action.payload;
-      return state.map((q) => (q.id === id ? { ...q, contents: options } : q));
+      const { id, isRequired, options, title } = action.payload;
+      return state.map((q) => {
+        if (q.id === id) {
+          return {
+            ...q,
+            isRequired: isRequired !== undefined ? isRequired : q.isRequired,
+            title: title !== undefined ? title : q.title,
+            contents: options !== undefined ? options : q.contents,
+          };
+        }
+        return q;
+      });
     },
     updateQuestions: (_, action: PayloadAction<Questions[]>) => {
       return action.payload;
@@ -91,8 +99,7 @@ export const {
   removeQuestion,
   addOption,
   removeOption,
-  updateRequired,
-  updateOptions,
+  updateQuestion,
   updateQuestions,
 } = questionSlice.actions;
 

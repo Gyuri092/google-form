@@ -2,7 +2,11 @@ import { css } from '@emotion/react';
 import { useRef, useState } from 'react';
 import { RxDragHandleDots2 } from 'react-icons/rx';
 import { useDispatch, useSelector } from 'react-redux';
-import { insertQuestion, updateQuestions } from '../../slice/questionSlice';
+import {
+  insertQuestion,
+  updateQuestion,
+  updateQuestions,
+} from '../../slice/questionSlice';
 import { RootState } from '../../store';
 import { Input } from '../Input';
 import { QuestionOption } from '../QuestionOption';
@@ -142,7 +146,13 @@ export const QuestionArea = () => {
                     }
                   }
                 `}
-                defaultValue={item.title}
+                onChange={(e) => {
+                  dispatch(
+                    updateQuestion({ id: item.id, title: e.target.value }),
+                  );
+                }}
+                value={item.title}
+                // defaultValue={item.title}
               />
             </div>
             <QuestionTypeSelectBox questionIndex={index} />
