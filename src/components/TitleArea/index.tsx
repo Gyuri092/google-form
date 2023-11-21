@@ -1,9 +1,14 @@
 import { css } from '@emotion/react';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Input } from '../Input';
+import { RootState } from '../../store';
+import { updateDescription, updateTitle } from '../../slice/titleSlice';
 
 export const TitleArea = () => {
   const [isFocused, setIsFocused] = useState(false);
+  const titleState = useSelector((state: RootState) => state.title);
+  const dispatch = useDispatch();
   return (
     <div
       css={css`
@@ -51,12 +56,24 @@ export const TitleArea = () => {
             `}
           />
         )}
-        <Input placeholder="설문지 제목" />
+        <Input
+          placeholder="설문지 제목"
+          onChange={(e) => {
+            dispatch(updateTitle(e.target.value));
+            localStorage.setItem('title', e.target.value);
+          }}
+          value={titleState.title}
+        />
         <Input
           placeholder="설문지 설명"
           inputStyle={css`
             font-size: 11pt;
           `}
+          onChange={(e) => {
+            dispatch(updateDescription(e.target.value));
+            localStorage.setItem('description', e.target.value);
+          }}
+          value={titleState.description}
         />
       </form>
     </div>

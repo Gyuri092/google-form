@@ -1,5 +1,5 @@
 import { SerializedStyles, css } from '@emotion/react';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 interface Props {
   readonly key?: string;
@@ -9,6 +9,8 @@ interface Props {
   readonly inputStyle?: SerializedStyles;
   readonly borderStyle?: SerializedStyles;
   readonly disabled?: boolean;
+  readonly value?: string;
+  readonly onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const Input = (props: Props) => {
@@ -37,6 +39,8 @@ export const Input = (props: Props) => {
         onBlur={() => setIsFocused(false)}
         placeholder={props.placeholder}
         defaultValue={props.defaultValue}
+        value={props.value}
+        onChange={props.onChange}
       />
       {isFocused && (
         <div
