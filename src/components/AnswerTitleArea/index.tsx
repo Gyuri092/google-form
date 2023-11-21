@@ -1,9 +1,12 @@
 import { css } from '@emotion/react';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Input } from '../Input';
+import { RootState } from '../../store';
 
 export const AnswerTitleArea = () => {
   const [isFocused, setIsFocused] = useState(false);
+  const title = useSelector((state: RootState) => state.title);
   return (
     <div
       css={css`
@@ -56,18 +59,14 @@ export const AnswerTitleArea = () => {
             `}
           />
         )}
-        <Input
-          disabled
-          placeholder="설문지 제목"
-          value={localStorage.getItem('title') ?? ''}
-        />
+        <Input disabled placeholder="설문지 제목" value={title.title} />
         <Input
           disabled
           placeholder="설문지 설명"
           inputStyle={css`
             font-size: 11pt;
           `}
-          value={localStorage.getItem('description') ?? ''}
+          value={title.description}
         />
       </form>
     </div>

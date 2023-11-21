@@ -58,10 +58,7 @@ export const TitleArea = () => {
         )}
         <Input
           placeholder="설문지 제목"
-          onChange={(e) => {
-            dispatch(updateTitle(e.target.value));
-            localStorage.setItem('title', e.target.value);
-          }}
+          onChange={(e) => dispatch(updateTitle(e.target.value))}
           value={titleState.title}
         />
         <Input
@@ -69,10 +66,7 @@ export const TitleArea = () => {
           inputStyle={css`
             font-size: 11pt;
           `}
-          onChange={(e) => {
-            dispatch(updateDescription(e.target.value));
-            localStorage.setItem('description', e.target.value);
-          }}
+          onChange={(e) => dispatch(updateDescription(e.target.value))}
           value={titleState.description}
         />
       </form>

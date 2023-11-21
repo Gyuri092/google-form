@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
-import { Input } from '../Input';
+import { AnswerInput } from '../AnswerInput';
 
 export const AnswerArea = () => {
-  const [isFocused, setIsFocused] = useState(true);
   const formRef = useRef<HTMLFormElement>(null);
+
   const questions = useSelector((state: RootState) => state.questions);
 
   return (
@@ -19,51 +19,33 @@ export const AnswerArea = () => {
             height: auto;
             border: 1px solid #dadce0;
             border-radius: 8px;
-            padding: 4px 20px 0 0;
+            padding: 24px;
             position: relative;
             box-sizing: border-box;
-            box-shadow: ${isFocused && '0 3px 3px rgba(0, 0, 0, 0.12)'},
-              ${isFocused && '0 1px 1px rgba(0, 0, 0, 0.14)'},
-              ${isFocused && '0 1px 2px rgba(0, 0, 0, 0.2)'};
             background: #fff;
             margin-bottom: 20px;
           `}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
           onSubmit={(e) => {
             e.preventDefault();
           }}
         >
           <div
             css={css`
-              height: 50px;
+              height: 88px;
               display: flex;
+              flex-direction: column;
               justify-content: space-between;
-              margin-bottom: 16px;
-              padding-left: 20px;
             `}
           >
             <div
               css={css`
-                width: 446px;
+                width: 100%;
+                height: 24px;
               `}
             >
-              <Input
-                placeholder="질문"
-                name="title"
-                inputStyle={css`
-                  font-size: 11pt;
-                  padding: 16px;
-                  &:focus {
-                    background-color: #f1f3f4;
-                    &:hover {
-                      background-color: #0000001a;
-                    }
-                  }
-                `}
-                defaultValue={item.title}
-              />
+              {item.title}
             </div>
+            <AnswerInput item={item} />
           </div>
         </form>
       ))}
