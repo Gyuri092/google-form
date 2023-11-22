@@ -31,7 +31,6 @@ export const AnswerArea = () => {
         >
           <div
             css={css`
-              height: 88px;
               display: flex;
               flex-direction: column;
               justify-content: space-between;
@@ -41,6 +40,7 @@ export const AnswerArea = () => {
               css={css`
                 width: 100%;
                 height: 24px;
+                margin-bottom: 16px;
               `}
             >
               {item.title}
