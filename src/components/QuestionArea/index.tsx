@@ -8,17 +8,18 @@ import {
   updateQuestions,
 } from '../../slice/questionSlice';
 import { RootState } from '../../store';
-import { Input } from '../Input';
 import { QuestionOption } from '../QuestionOption';
 import { QuestionTypeSelectBox } from '../QuestionTypeSelectBox';
 
 export const QuestionArea = () => {
-  const [isFocused, setIsFocused] = useState(true);
-  const formRef = useRef<HTMLFormElement>(null);
+  const formRefs = useRef<HTMLFormElement[] | null>([]);
   const questions = useSelector((state: RootState) => state.questions);
   const dispatch = useDispatch();
   const dragItem = useRef<number | null>(null);
   const dragOverItem = useRef<number | null>(null);
+  const [isFocused, setIsFocused] = useState<boolean[]>(
+    new Array(questions.length).fill(false),
+  );
 
   const dragStart = (index: number) => {
     dragItem.current = index;
@@ -41,14 +42,14 @@ export const QuestionArea = () => {
   };
 
   const copyQuestion = (questionIndex: number) => {
-    const { current: form } = formRef;
+    const form = formRefs.current && formRefs.current[questionIndex];
     if (!form) return;
     const formData = new FormData(form);
     const contents =
       questions[questionIndex]?.contents ||
       [].map((_, index) => formData.get(`contents-${index + 1}`) as string);
     const payload = {
-      id: 1,
+      id: questions.length + 1,
       type: questions[questionIndex]?.type || 'multiple-choice-questions',
       title: formData.get('title') as string,
       contents: contents ?? [],
@@ -62,7 +63,10 @@ export const QuestionArea = () => {
       {questions.map((item, index) => (
         <form
           key={`${item.title}-${index - 0}`}
-          ref={formRef}
+          ref={(ref) => {
+            if (!formRefs.current || !ref) return;
+            formRefs.current[index] = ref;
+          }}
           css={css`
             height: auto;
             border: 1px solid #dadce0;
@@ -70,14 +74,26 @@ export const QuestionArea = () => {
             padding: 4px 20px 0 0;
             position: relative;
             box-sizing: border-box;
-            box-shadow: ${isFocused && '0 3px 3px rgba(0, 0, 0, 0.12)'},
-              ${isFocused && '0 1px 1px rgba(0, 0, 0, 0.14)'},
-              ${isFocused && '0 1px 2px rgba(0, 0, 0, 0.2)'};
+            box-shadow: ${isFocused[index] && '0 3px 3px rgba(0, 0, 0, 0.12)'},
+              ${isFocused[index] && '0 1px 1px rgba(0, 0, 0, 0.14)'},
+              ${isFocused[index] && '0 1px 2px rgba(0, 0, 0, 0.2)'};
             background: #fff;
             margin-bottom: 20px;
           `}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
+          onFocus={() =>
+            setIsFocused((prev) => {
+              const copyPrev = [...prev];
+              copyPrev[index] = true;
+              return copyPrev;
+            })
+          }
+          onBlur={() =>
+            setIsFocused((prev) => {
+              const copyPrev = [...prev];
+              copyPrev[index] = false;
+              return copyPrev;
+            })
+          }
           onSubmit={(e) => {
             e.preventDefault();
             copyQuestion(index);
@@ -107,7 +123,7 @@ export const QuestionArea = () => {
               `}
             />
           </div>
-          {isFocused && (
+          {isFocused[index] && (
             <div
               css={css`
                 position: absolute;
@@ -133,10 +149,10 @@ export const QuestionArea = () => {
                 width: 446px;
               `}
             >
-              <Input
+              <input
                 placeholder="질문"
                 name="title"
-                inputStyle={css`
+                css={css`
                   font-size: 11pt;
                   padding: 16px;
                   &:focus {
@@ -146,13 +162,20 @@ export const QuestionArea = () => {
                     }
                   }
                 `}
-                onChange={(e) => {
+                defaultValue={item.title}
+                onBlur={(e) => {
                   dispatch(
-                    updateQuestion({ id: item.id, title: e.target.value }),
+                    updateQuestion({
+                      id: item.id,
+                      title: (() => {
+                        const matchingQuestion = questions.find(
+                          (q) => q.id === item.id,
+                        );
+                        return matchingQuestion && e.target.value;
+                      })(),
+                    }),
                   );
                 }}
-                value={item.title}
-                // defaultValue={item.title}
               />
             </div>
             <QuestionTypeSelectBox questionIndex={index} />
