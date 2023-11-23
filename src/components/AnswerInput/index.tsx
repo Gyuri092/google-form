@@ -5,6 +5,7 @@ import { MdOutlineCheckBox, MdOutlineRadioButtonChecked } from 'react-icons/md';
 import { Questions } from '../../slice/questionSlice';
 import { CheckboxAnswer } from '../CheckboxAnswer';
 import { DropDownAnswer } from '../DropDownAnswer';
+import { RadioButtonAnswer } from '../RadioButtonAnswer';
 
 export const AnswerInput = ({ item }: { item: Questions }) => {
   const renderIcon = () => {
@@ -49,7 +50,10 @@ export const AnswerInput = ({ item }: { item: Questions }) => {
   };
   const renderAnswer = () => {
     const { type, contents } = item;
-    if (type === 'multiple-choice-questions' || type === 'check-box') {
+    if (type === 'multiple-choice-questions') {
+      return <RadioButtonAnswer contents={contents} />;
+    }
+    if (type === 'check-box') {
       return <CheckboxAnswer contents={contents} />;
     }
     if (type === 'drop-down') {
