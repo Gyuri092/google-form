@@ -31,6 +31,7 @@ export const AnswerArea = () => {
         >
           <div
             css={css`
+              position: relative;
               display: flex;
               flex-direction: column;
               justify-content: space-between;
