@@ -1,6 +1,4 @@
 import { css } from '@emotion/react';
-import { LiaChevronCircleDownSolid } from 'react-icons/lia';
-import { MdOutlineCheckBox, MdOutlineRadioButtonChecked } from 'react-icons/md';
 
 import { Questions } from '../../slice/questionSlice';
 import { CheckboxAnswer } from '../CheckboxAnswer';
@@ -8,46 +6,6 @@ import { DropDownAnswer } from '../DropDownAnswer';
 import { RadioButtonAnswer } from '../RadioButtonAnswer';
 
 export const AnswerInput = ({ item }: { item: Questions }) => {
-  const renderIcon = () => {
-    switch (item.type) {
-      case 'multiple-choice-questions':
-        return (
-          <MdOutlineRadioButtonChecked
-            css={css`
-              width: 24px;
-              height: 24px;
-              color: #5f6367;
-              margin-right: 8px;
-            `}
-          />
-        );
-
-      case 'check-box':
-        return (
-          <MdOutlineCheckBox
-            css={css`
-              width: 24px;
-              height: 24px;
-              color: #5f6367;
-              margin-right: 8px;
-            `}
-          />
-        );
-      case 'drop-down':
-        return (
-          <LiaChevronCircleDownSolid
-            css={css`
-              width: 24px;
-              height: 24px;
-              color: #5f6367;
-              margin-right: 8px;
-            `}
-          />
-        );
-      default:
-        return null;
-    }
-  };
   const renderAnswer = () => {
     const { type, contents } = item;
     if (type === 'multiple-choice-questions') {
