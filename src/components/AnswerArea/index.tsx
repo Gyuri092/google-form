@@ -45,6 +45,18 @@ export const AnswerArea = () => {
               `}
             >
               {item.title}
+              {item.isRequired && (
+                <span
+                  css={css`
+                    margin-left: 4px;
+                    color: #d93025;
+                    font-size: 20px;
+                    vertical-align: middle;
+                  `}
+                >
+                  *
+                </span>
+              )}
             </div>
             <AnswerInput item={item} />
           </div>
