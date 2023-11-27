@@ -2,7 +2,13 @@ import { css } from '@emotion/react';
 import { useState } from 'react';
 import { GoTriangleDown, GoTriangleUp } from 'react-icons/go';
 
-export const DropDownAnswer = ({ contents }: { contents: string[] }) => {
+export const DropDownAnswer = ({
+  contents,
+  isRequired,
+}: {
+  contents: string[];
+  isRequired: boolean;
+}) => {
   const [isSelected, setIsSelected] = useState(false);
   const [selectedValue, setSelectedValue] = useState('선택');
 

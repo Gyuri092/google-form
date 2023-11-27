@@ -1,7 +1,13 @@
 import { css } from '@emotion/react';
 import { useRef, useState } from 'react';
 
-export const CheckboxAnswer = ({ contents }: { contents: string[] }) => {
+export const CheckboxAnswer = ({
+  contents,
+  isRequired,
+}: {
+  contents: string[];
+  isRequired: boolean;
+}) => {
   const textInputRef = useRef<HTMLInputElement | null>(null);
   const [isChecked, setIsChecked] = useState(false);
 
@@ -21,6 +27,7 @@ export const CheckboxAnswer = ({ contents }: { contents: string[] }) => {
           `}
         >
           <input
+            required={isRequired}
             type="checkbox"
             css={css`
               width: 20px;
@@ -51,6 +58,7 @@ export const CheckboxAnswer = ({ contents }: { contents: string[] }) => {
         `}
       >
         <input
+          required={isRequired}
           type="checkbox"
           css={css`
             width: 20px;
@@ -70,6 +78,7 @@ export const CheckboxAnswer = ({ contents }: { contents: string[] }) => {
         />
         <p>기타: </p>
         <input
+          required={isRequired}
           type="text"
           ref={textInputRef}
           css={css`

@@ -9,20 +9,21 @@ import { RadioButtonAnswer } from '../RadioButtonAnswer';
 export const AnswerInput = ({ item }: { item: Questions }) => {
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
 
-  const { type, contents } = item;
+  const { type, contents, isRequired } = item;
   const renderAnswer = () => {
     if (type === 'multiple-choice-questions') {
-      return <RadioButtonAnswer contents={contents} />;
+      return <RadioButtonAnswer contents={contents} isRequired={isRequired} />;
     }
     if (type === 'check-box') {
-      return <CheckboxAnswer contents={contents} />;
+      return <CheckboxAnswer contents={contents} isRequired={isRequired} />;
     }
     if (type === 'drop-down') {
-      return <DropDownAnswer contents={contents} />;
+      return <DropDownAnswer contents={contents} isRequired={isRequired} />;
     }
     if (type === 'short-answer') {
       return (
         <input
+          required={isRequired}
           type="text"
           placeholder="내 답변"
           css={css`

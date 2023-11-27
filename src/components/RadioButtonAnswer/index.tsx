@@ -1,7 +1,13 @@
 import { css } from '@emotion/react';
 import { useRef, useState } from 'react';
 
-export const RadioButtonAnswer = ({ contents }: { contents: string[] }) => {
+export const RadioButtonAnswer = ({
+  contents,
+  isRequired,
+}: {
+  contents: string[];
+  isRequired: boolean;
+}) => {
   const textInputRef = useRef<HTMLInputElement | null>(null);
   const [isChecked, setIsChecked] = useState<number | null>(null);
 
@@ -24,6 +30,7 @@ export const RadioButtonAnswer = ({ contents }: { contents: string[] }) => {
             `}
           >
             <input
+              required={isRequired}
               type="radio"
               name="radio-group"
               css={css`
@@ -45,6 +52,7 @@ export const RadioButtonAnswer = ({ contents }: { contents: string[] }) => {
             <p>{option.includes('기타') ? '기타: ' : option}</p>
             {option.includes('기타') && (
               <input
+                required={isRequired}
                 type="text"
                 ref={textInputRef}
                 css={css`

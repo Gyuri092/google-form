@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { AnswerArea } from '../../components/AnswerArea';
 import { AnswerTitleArea } from '../../components/AnswerTitleArea';
+import { AnswerSubmitArea } from '../../components/AnswerSubmitArea';
 
 export const SurveyPreview = () => {
   return (
@@ -24,6 +25,7 @@ export const SurveyPreview = () => {
       >
         <AnswerTitleArea />
         <AnswerArea />
+        <AnswerSubmitArea />
       </div>
     </div>
   );
