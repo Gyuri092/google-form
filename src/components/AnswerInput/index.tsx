@@ -1,13 +1,16 @@
 import { css } from '@emotion/react';
 
+import { useRef } from 'react';
 import { Questions } from '../../slice/questionSlice';
 import { CheckboxAnswer } from '../CheckboxAnswer';
 import { DropDownAnswer } from '../DropDownAnswer';
 import { RadioButtonAnswer } from '../RadioButtonAnswer';
 
 export const AnswerInput = ({ item }: { item: Questions }) => {
+  const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
+
+  const { type, contents } = item;
   const renderAnswer = () => {
-    const { type, contents } = item;
     if (type === 'multiple-choice-questions') {
       return <RadioButtonAnswer contents={contents} />;
     }
@@ -17,19 +20,41 @@ export const AnswerInput = ({ item }: { item: Questions }) => {
     if (type === 'drop-down') {
       return <DropDownAnswer contents={contents} />;
     }
+    if (type === 'short-answer') {
+      return (
+        <input
+          type="text"
+          placeholder="내 답변"
+          css={css`
+            width: 50%;
+            height: 24px;
+            outline: none;
+            border-bottom: 1px solid #dadce0;
+            font-size: 11pt;
+            padding: 2px;
+          `}
+          defaultValue=""
+        />
+      );
+    }
     return (
-      <input
-        type="text"
+      <textarea
+        ref={textAreaRef}
         placeholder="내 답변"
         css={css`
-          width: 50%;
-          height: 24px;
+          width: 100%;
           outline: none;
           border-bottom: 1px solid #dadce0;
           font-size: 11pt;
           padding: 2px;
+          resize: none;
         `}
-        defaultValue=""
+        rows={1}
+        onChange={() => {
+          if (!textAreaRef.current) return;
+          textAreaRef.current.style.height = 'auto';
+          textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
+        }}
       />
     );
   };
