@@ -72,7 +72,10 @@ export const RadioButtonAnswer = ({ contents }: { contents: string[] }) => {
         css={css`
           display: flex;
           justify-content: flex-end;
-          height: 36px;
+          height: ${isChecked !== null && isChecked < contents.length
+            ? '36px'
+            : '0px'};
+          transition: height 0.3s ease-in-out;
         `}
       >
         {isChecked !== null && isChecked < contents.length && (
@@ -91,6 +94,7 @@ export const RadioButtonAnswer = ({ contents }: { contents: string[] }) => {
                 background: #f9f9f9;
               }
             `}
+            onClick={() => setIsChecked(null)}
           >
             선택해제
           </button>
