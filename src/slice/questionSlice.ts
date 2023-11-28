@@ -1,9 +1,10 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
+import { QuestionType } from '../types';
 
 export interface Questions {
   id: number;
-  type: string;
+  type: QuestionType;
   title: string;
   contents: string[];
   isRequired: boolean;
