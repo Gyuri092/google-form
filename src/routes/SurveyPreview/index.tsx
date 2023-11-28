@@ -1,8 +1,12 @@
 import { css } from '@emotion/react';
+import { useSelector } from 'react-redux';
 import { AnswerArea } from '../../components/Answer/AnswerArea';
 import { AnswerTitleArea } from '../../components/Answer/AnswerTitleArea';
+import { RootState } from '../../store';
+import { Modal } from '../../components/Modal';
 
 export const SurveyPreview = () => {
+  const isOpen = useSelector((state: RootState) => state.modal);
   return (
     <div
       css={css`
@@ -25,6 +29,7 @@ export const SurveyPreview = () => {
         <AnswerTitleArea />
         <AnswerArea />
       </div>
+      {isOpen && <Modal />}
     </div>
   );
 };

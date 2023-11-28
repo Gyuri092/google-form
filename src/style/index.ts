@@ -31,8 +31,11 @@ const reset = css`
     display: block;
   }
   body {
+    width: auto;
+    height: auto;
     line-height: 1;
     background: #f0ebf8;
+    position: relative;
   }
   blockquote,
   q {

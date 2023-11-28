@@ -4,17 +4,19 @@ import { persistReducer } from 'redux-persist';
 import questionReducer from './slice/questionSlice';
 import titleReducer from './slice/titleSlice';
 import answerReducer from './slice/answerSlice';
+import modalReducer from './slice/modalSlice';
 
 const reducers = combineReducers({
   questions: questionReducer,
   title: titleReducer,
   answers: answerReducer,
+  modal: modalReducer,
 });
 
 const persistConfig = {
   key: 'root',
   storage,
-  whiteList: ['questions', 'title', 'answers'],
+  whiteList: ['questions', 'title', 'answers', 'modal'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

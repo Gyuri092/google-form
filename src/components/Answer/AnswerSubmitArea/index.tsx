@@ -1,6 +1,9 @@
 import { css } from '@emotion/react';
+import { useDispatch } from 'react-redux';
+import { openModal } from '../../../slice/modalSlice';
 
 export const AnswerSubmitArea = () => {
+  const dispatch = useDispatch();
   return (
     <div
       css={css`
@@ -38,6 +41,7 @@ export const AnswerSubmitArea = () => {
             background: #e9e7f7;
           }
         `}
+        onClick={() => dispatch(openModal(true))}
       >
         양식 지우기
       </button>
