@@ -1,20 +1,43 @@
 import { css } from '@emotion/react';
-import { useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import { RootState } from '../../store';
 import { AnswerInput } from '../AnswerInput';
+import { AnswerSubmitArea } from '../AnswerSubmitArea';
+import { initializeAnswers } from '../../slice/answerSlice';
 
 export const AnswerArea = () => {
-  const formRef = useRef<HTMLFormElement>(null);
-
   const questions = useSelector((state: RootState) => state.questions);
+  const surveyAnswers = useSelector((state: RootState) => state.answers);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const initialAnswers = questions.map((question) => {
+    return {
+      id: question.id,
+      type: question.type,
+      isRequired: question.isRequired,
+      value: '',
+    };
+  });
+
+  useEffect(() => {
+    if (surveyAnswers.length < questions.length) {
+      dispatch(initializeAnswers(initialAnswers));
+    }
+  }, [dispatch, initialAnswers, questions.length, surveyAnswers.length]);
 
   return (
-    <>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        navigate('/response');
+        dispatch(initializeAnswers(initialAnswers));
+      }}
+    >
       {questions.map((item, index) => (
-        <form
+        <div
           key={`${item.title}-${index - 0}`}
-          ref={formRef}
           css={css`
             height: auto;
             border: 1px solid #dadce0;
@@ -25,9 +48,6 @@ export const AnswerArea = () => {
             background: #fff;
             margin-bottom: 20px;
           `}
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
         >
           <div
             css={css`
@@ -60,8 +80,9 @@ export const AnswerArea = () => {
             </div>
             <AnswerInput item={item} />
           </div>
-        </form>
+        </div>
       ))}
-    </>
+      <AnswerSubmitArea />
+    </form>
   );
 };

@@ -1,15 +1,14 @@
 import { css } from '@emotion/react';
 import { useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateAnswer } from '../../slice/answerSlice';
+import { Questions } from '../../slice/questionSlice';
 
-export const RadioButtonAnswer = ({
-  contents,
-  isRequired,
-}: {
-  contents: string[];
-  isRequired: boolean;
-}) => {
+export const RadioButtonAnswer = ({ item }: { item: Questions }) => {
+  const { id, type, contents, isRequired } = item;
   const textInputRef = useRef<HTMLInputElement | null>(null);
   const [isChecked, setIsChecked] = useState<number | null>(null);
+  const dispatch = useDispatch();
 
   return (
     <div>
@@ -46,6 +45,7 @@ export const RadioButtonAnswer = ({
               onChange={() => {
                 textInputRef.current?.focus();
                 setIsChecked(idx);
+                dispatch(updateAnswer({ id, type, isRequired, value: option }));
               }}
               onBlur={() => textInputRef.current?.blur()}
             />
@@ -54,6 +54,7 @@ export const RadioButtonAnswer = ({
               <input
                 required={isRequired}
                 type="text"
+                name="radio-others"
                 ref={textInputRef}
                 css={css`
                   width: calc(100% - 100px);
@@ -64,10 +65,17 @@ export const RadioButtonAnswer = ({
                   padding: 2px;
                   margin-right: 10px;
                 `}
-                defaultValue=""
                 onChange={(e) => {
                   if (e.target.value) {
                     setIsChecked(idx);
+                    dispatch(
+                      updateAnswer({
+                        id,
+                        type,
+                        isRequired,
+                        value: e.target.value,
+                      }),
+                    );
                   }
                 }}
                 onBlur={() => textInputRef.current?.blur()}
@@ -102,7 +110,9 @@ export const RadioButtonAnswer = ({
                 background: #f9f9f9;
               }
             `}
-            onClick={() => setIsChecked(null)}
+            onClick={() => {
+              setIsChecked(null);
+            }}
           >
             선택해제
           </button>

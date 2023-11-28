@@ -1,8 +1,6 @@
 import { css } from '@emotion/react';
-import { useNavigate } from 'react-router-dom';
 
 export const AnswerSubmitArea = () => {
-  const navigate = useNavigate();
   return (
     <div
       css={css`
@@ -18,7 +16,7 @@ export const AnswerSubmitArea = () => {
       `}
     >
       <button
-        type="button"
+        type="submit"
         css={css`
           width: 72px;
           background: #673ab6;
@@ -27,7 +25,6 @@ export const AnswerSubmitArea = () => {
             background: #7349bc;
           }
         `}
-        onClick={() => navigate('/response')}
       >
         제출
       </button>

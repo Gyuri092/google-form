@@ -1,15 +1,14 @@
 import { css } from '@emotion/react';
 import { useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateAnswer } from '../../slice/answerSlice';
+import { Questions } from '../../slice/questionSlice';
 
-export const CheckboxAnswer = ({
-  contents,
-  isRequired,
-}: {
-  contents: string[];
-  isRequired: boolean;
-}) => {
+export const CheckboxAnswer = ({ item }: { item: Questions }) => {
+  const { id, type, contents, isRequired } = item;
   const textInputRef = useRef<HTMLInputElement | null>(null);
   const [isChecked, setIsChecked] = useState(false);
+  const dispatch = useDispatch();
 
   return contents.map((option, idx) => {
     if (!option.includes('기타')) {
@@ -29,6 +28,7 @@ export const CheckboxAnswer = ({
           <input
             required={isRequired}
             type="checkbox"
+            name="checkbox"
             css={css`
               width: 20px;
               height: 24px;
@@ -38,6 +38,11 @@ export const CheckboxAnswer = ({
               padding: 2px;
               margin-right: 10px;
             `}
+            onChange={() =>
+              dispatch(
+                updateAnswer({ id, type, isRequired, value: option ?? '' }),
+              )
+            }
           />
           <p>{option}</p>
         </label>
@@ -80,6 +85,7 @@ export const CheckboxAnswer = ({
         <input
           required={isRequired}
           type="text"
+          name="check-others"
           ref={textInputRef}
           css={css`
             width: calc(100% - 100px);
@@ -90,10 +96,17 @@ export const CheckboxAnswer = ({
             padding: 2px;
             margin-right: 10px;
           `}
-          defaultValue=""
           onChange={(e) => {
             if (e.target.value) {
               setIsChecked(true);
+              dispatch(
+                updateAnswer({
+                  id,
+                  type,
+                  isRequired,
+                  value: e.target.value,
+                }),
+              );
             }
           }}
         />

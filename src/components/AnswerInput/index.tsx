@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
 
 import { useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateAnswer } from '../../slice/answerSlice';
 import { Questions } from '../../slice/questionSlice';
 import { CheckboxAnswer } from '../CheckboxAnswer';
 import { DropDownAnswer } from '../DropDownAnswer';
@@ -8,23 +10,25 @@ import { RadioButtonAnswer } from '../RadioButtonAnswer';
 
 export const AnswerInput = ({ item }: { item: Questions }) => {
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
+  const dispatch = useDispatch();
+  const { id, type, isRequired } = item;
 
-  const { type, contents, isRequired } = item;
   const renderAnswer = () => {
     if (type === 'multiple-choice-questions') {
-      return <RadioButtonAnswer contents={contents} isRequired={isRequired} />;
+      return <RadioButtonAnswer item={item} />;
     }
     if (type === 'check-box') {
-      return <CheckboxAnswer contents={contents} isRequired={isRequired} />;
+      return <CheckboxAnswer item={item} />;
     }
     if (type === 'drop-down') {
-      return <DropDownAnswer contents={contents} isRequired={isRequired} />;
+      return <DropDownAnswer item={item} />;
     }
     if (type === 'short-answer') {
       return (
         <input
           required={isRequired}
           type="text"
+          name="short-answer"
           placeholder="내 답변"
           css={css`
             width: 50%;
@@ -34,14 +38,25 @@ export const AnswerInput = ({ item }: { item: Questions }) => {
             font-size: 11pt;
             padding: 2px;
           `}
-          defaultValue=""
+          onChange={(e) =>
+            dispatch(
+              updateAnswer({
+                id,
+                type,
+                isRequired,
+                value: e.target.value,
+              }),
+            )
+          }
         />
       );
     }
     return (
       <textarea
+        required={isRequired}
         ref={textAreaRef}
         placeholder="내 답변"
+        name="long-sentence"
         css={css`
           width: 100%;
           outline: none;
@@ -51,10 +66,18 @@ export const AnswerInput = ({ item }: { item: Questions }) => {
           resize: none;
         `}
         rows={1}
-        onChange={() => {
+        onChange={(e) => {
           if (!textAreaRef.current) return;
           textAreaRef.current.style.height = 'auto';
           textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
+          dispatch(
+            updateAnswer({
+              id,
+              type,
+              isRequired,
+              value: e.target.value,
+            }),
+          );
         }}
       />
     );

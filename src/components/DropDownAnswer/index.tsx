@@ -1,16 +1,15 @@
 import { css } from '@emotion/react';
 import { useState } from 'react';
 import { GoTriangleDown, GoTriangleUp } from 'react-icons/go';
+import { useDispatch } from 'react-redux';
+import { Questions } from '../../slice/questionSlice';
+import { updateAnswer } from '../../slice/answerSlice';
 
-export const DropDownAnswer = ({
-  contents,
-  isRequired,
-}: {
-  contents: string[];
-  isRequired: boolean;
-}) => {
+export const DropDownAnswer = ({ item }: { item: Questions }) => {
+  const { id, type, contents, isRequired } = item;
   const [isSelected, setIsSelected] = useState(false);
   const [selectedValue, setSelectedValue] = useState('선택');
+  const dispatch = useDispatch();
 
   const calculateTop = () => {
     const minHeight = 34;
@@ -28,13 +27,23 @@ export const DropDownAnswer = ({
 
   return (
     <button
+      name="drop-down"
       type="button"
       onClick={(e) => {
         setIsSelected((prev) => !prev);
         if (e.target instanceof HTMLLIElement && e.target.textContent) {
           setSelectedValue(e.target.textContent);
+          dispatch(
+            updateAnswer({
+              id,
+              type,
+              isRequired,
+              value: e.target.textContent,
+            }),
+          );
         } else {
           setSelectedValue('선택');
+          dispatch(updateAnswer({ id, type, isRequired, value: '선택' }));
         }
       }}
       onBlur={() => setIsSelected(false)}
