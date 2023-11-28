@@ -6,8 +6,8 @@ import {
   insertQuestion,
   updateQuestion,
   updateQuestions,
-} from '../../slice/questionSlice';
-import { RootState } from '../../store';
+} from '../../../slice/questionSlice';
+import { RootState } from '../../../store';
 import { QuestionOption } from '../QuestionOption';
 import { QuestionTypeSelectBox } from '../QuestionTypeSelectBox';
 

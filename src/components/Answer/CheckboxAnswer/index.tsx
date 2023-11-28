@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { updateAnswer } from '../../slice/answerSlice';
-import { Questions } from '../../slice/questionSlice';
+import { updateAnswer } from '../../../slice/answerSlice';
+import { Questions } from '../../../slice/questionSlice';
 
 export const CheckboxAnswer = ({ item }: { item: Questions }) => {
   const { id, type, contents, isRequired } = item;

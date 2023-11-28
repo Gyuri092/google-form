@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import { RootState } from '../../../store';
 import { AddOptionLine } from '../AddOptionLine';
 import { ToolsBlock } from '../ToolsBlock';
 import { MultipleChoiceList } from './MultipleChoiceList';

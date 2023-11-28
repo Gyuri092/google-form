@@ -26,7 +26,7 @@ export const questionSlice = createSlice({
   reducers: {
     changeQuestionType: (
       state,
-      action: PayloadAction<{ id: number; type: string }>,
+      action: PayloadAction<{ id: number; type: QuestionType }>,
     ) => {
       const { id, type } = action.payload;
       const multipleChoice =

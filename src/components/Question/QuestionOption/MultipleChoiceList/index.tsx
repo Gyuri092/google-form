@@ -2,11 +2,11 @@ import { css } from '@emotion/react';
 import { useRef } from 'react';
 import { RxDragHandleDots2 } from 'react-icons/rx';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateQuestion } from '../../../slice/questionSlice';
-import { RootState } from '../../../store';
-import { OptionDeleteButton } from '../../Button/OptionDeleteButton';
-import { IndexIcon } from '../../Icon/IndexIcon';
-import { Input } from '../../Input';
+import { updateQuestion } from '../../../../slice/questionSlice';
+import { RootState } from '../../../../store';
+import { OptionDeleteButton } from '../../../Button/OptionDeleteButton';
+import { IndexIcon } from '../../../Icon/IndexIcon';
+import { Input } from '../../../Input';
 
 export const MultipleChoiceList = ({
   questionIndex,

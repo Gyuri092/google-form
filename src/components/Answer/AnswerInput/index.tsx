@@ -2,8 +2,8 @@ import { css } from '@emotion/react';
 
 import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { updateAnswer } from '../../slice/answerSlice';
-import { Questions } from '../../slice/questionSlice';
+import { updateAnswer } from '../../../slice/answerSlice';
+import { Questions } from '../../../slice/questionSlice';
 import { CheckboxAnswer } from '../CheckboxAnswer';
 import { DropDownAnswer } from '../DropDownAnswer';
 import { RadioButtonAnswer } from '../RadioButtonAnswer';

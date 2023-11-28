@@ -2,12 +2,13 @@ import { css } from '@emotion/react';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { useDispatch } from 'react-redux';
 import { insertQuestion } from '../../slice/questionSlice';
+import { QuestionType } from '../../types';
 
 export const QuestionAddButton = () => {
   const dispatch = useDispatch();
   const payload = {
     id: 1,
-    type: 'multiple-choice-questions',
+    type: 'multiple-choice-questions' as QuestionType,
     title: '',
     contents: ['옵션 1'],
     isRequired: false,

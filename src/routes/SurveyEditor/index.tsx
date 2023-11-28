@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { QuestionAddButton } from '../../components/Button/QuestionAddButton';
-import { QuestionArea } from '../../components/QuestionArea';
-import { TitleArea } from '../../components/TitleArea';
+import { QuestionArea } from '../../components/Question/QuestionArea';
+import { TitleArea } from '../../components/Question/TitleArea';
 import { Header } from '../../components/Header';
 
 export const SurveyEditor = () => {

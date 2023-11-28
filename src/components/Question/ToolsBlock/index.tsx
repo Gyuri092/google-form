@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { CgTrash } from 'react-icons/cg';
 import { MdContentCopy } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeQuestion, updateQuestion } from '../../slice/questionSlice';
-import { RootState } from '../../store';
+import { removeQuestion, updateQuestion } from '../../../slice/questionSlice';
+import { RootState } from '../../../store';
 
 export const ToolsBlock = ({ questionIndex }: { questionIndex: number }) => {
   const [hoverItem, setHoverItem] = useState('');

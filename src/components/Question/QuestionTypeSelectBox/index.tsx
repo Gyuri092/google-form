@@ -1,7 +1,8 @@
 import { css } from '@emotion/react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeQuestionType } from '../../slice/questionSlice';
-import { RootState } from '../../store';
+import { changeQuestionType } from '../../../slice/questionSlice';
+import { RootState } from '../../../store';
+import { QuestionType } from '../../../types';
 
 export const QuestionTypeSelectBox = ({
   questionIndex,
@@ -26,7 +27,9 @@ export const QuestionTypeSelectBox = ({
       `}
       value={questions[questionIndex]?.type || 'multiple-choice-questions'}
       onChange={(e) =>
-        dispatch(changeQuestionType({ id, type: e.target.value }))
+        dispatch(
+          changeQuestionType({ id, type: e.target.value as QuestionType }),
+        )
       }
     >
       <option value="short-answer">단답형</option>

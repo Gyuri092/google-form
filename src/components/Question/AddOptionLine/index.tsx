@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addOption } from '../../slice/questionSlice';
-import { RootState } from '../../store';
-import { IndexIcon } from '../Icon/IndexIcon';
+import { addOption } from '../../../slice/questionSlice';
+import { RootState } from '../../../store';
+import { IndexIcon } from '../../Icon/IndexIcon';
 
 export const AddOptionLine = ({ questionIndex }: { questionIndex: number }) => {
   const question = useSelector(

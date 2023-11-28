@@ -2,10 +2,10 @@ import { css } from '@emotion/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { RootState } from '../../store';
+import { RootState } from '../../../store';
 import { AnswerInput } from '../AnswerInput';
 import { AnswerSubmitArea } from '../AnswerSubmitArea';
-import { initializeAnswers } from '../../slice/answerSlice';
+import { initializeAnswers } from '../../../slice/answerSlice';
 
 export const AnswerArea = () => {
   const questions = useSelector((state: RootState) => state.questions);

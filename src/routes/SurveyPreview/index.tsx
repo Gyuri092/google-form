@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { AnswerArea } from '../../components/AnswerArea';
-import { AnswerTitleArea } from '../../components/AnswerTitleArea';
+import { AnswerArea } from '../../components/Answer/AnswerArea';
+import { AnswerTitleArea } from '../../components/Answer/AnswerTitleArea';
 
 export const SurveyPreview = () => {
   return (

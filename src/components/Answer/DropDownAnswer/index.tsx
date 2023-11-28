@@ -2,8 +2,8 @@ import { css } from '@emotion/react';
 import { useState } from 'react';
 import { GoTriangleDown, GoTriangleUp } from 'react-icons/go';
 import { useDispatch } from 'react-redux';
-import { Questions } from '../../slice/questionSlice';
-import { updateAnswer } from '../../slice/answerSlice';
+import { Questions } from '../../../slice/questionSlice';
+import { updateAnswer } from '../../../slice/answerSlice';
 
 export const DropDownAnswer = ({ item }: { item: Questions }) => {
   const { id, type, contents, isRequired } = item;
