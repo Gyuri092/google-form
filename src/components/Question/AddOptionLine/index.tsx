@@ -35,7 +35,7 @@ export const AddOptionLine = ({ questionIndex }: { questionIndex: number }) => {
         <button
           type="button"
           css={css`
-            width: 60px;
+            width: auto;
             height: 30px;
             display: flex;
             align-items: center;

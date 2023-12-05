@@ -98,7 +98,7 @@ export const RadioButtonAnswer = ({ item }: { item: Questions }) => {
           <button
             type="button"
             css={css`
-              width: 70px;
+              width: auto;
               font-size: 14px;
               padding: 0 8px;
               border-radius: 4px;
