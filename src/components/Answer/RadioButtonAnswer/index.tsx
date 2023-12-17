@@ -48,7 +48,9 @@ export const RadioButtonAnswer = ({ item }: { item: Questions }) => {
                 (answers.find((answer) => answer.id === id)?.value === option &&
                   answers.find((answer) => answer.id === id)?.checked ===
                     idx) ||
-                (idx === others && isChecked)
+                ((answers.find((answer) => answer.id === id)?.checked === idx &&
+                  idx) === others &&
+                  isChecked)
               }
               onChange={() => {
                 textInputRef.current?.focus();
@@ -81,6 +83,11 @@ export const RadioButtonAnswer = ({ item }: { item: Questions }) => {
                   padding: 2px;
                   margin-right: 10px;
                 `}
+                value={
+                  answers.find((answer) => answer.id === id)?.checked === others
+                    ? answers.find((answer) => answer.id === id)?.value
+                    : ''
+                }
                 onChange={(e) => {
                   if (e.target.value) {
                     dispatch(
@@ -105,48 +112,46 @@ export const RadioButtonAnswer = ({ item }: { item: Questions }) => {
         );
       })}
 
-      {isChecked && (
+      {isChecked && answers.find((answer) => answer.id === id)?.checked && (
         <div
           key="unchecked-answer"
           css={css`
             display: flex;
             justify-content: flex-end;
-            height: ${isChecked ? '36px' : '0px'};
+            height: 36px;
             transition: height 0.3s ease-in-out;
           `}
         >
-          {isChecked && (
-            <button
-              type="button"
-              css={css`
-                width: auto;
-                font-size: 14px;
-                padding: 0 8px;
-                border-radius: 4px;
-                color: #5f6368;
-                font-weight: 500;
-                line-height: 36px;
-                letter-spacing: 0.25px;
-                :hover {
-                  background: #f9f9f9;
-                }
-              `}
-              onClick={() => {
-                dispatch(
-                  updateAnswer({
-                    id,
-                    type,
-                    isRequired,
-                    value: '',
-                    checked: undefined,
-                  }),
-                );
-                setIsChecked(false);
-              }}
-            >
-              선택해제
-            </button>
-          )}
+          <button
+            type="button"
+            css={css`
+              width: auto;
+              font-size: 14px;
+              padding: 0 8px;
+              border-radius: 4px;
+              color: #5f6368;
+              font-weight: 500;
+              line-height: 36px;
+              letter-spacing: 0.25px;
+              :hover {
+                background: #f9f9f9;
+              }
+            `}
+            onClick={() => {
+              dispatch(
+                updateAnswer({
+                  id,
+                  type,
+                  isRequired,
+                  value: '',
+                  checked: undefined,
+                }),
+              );
+              setIsChecked(false);
+            }}
+          >
+            선택해제
+          </button>
         </div>
       )}
     </div>

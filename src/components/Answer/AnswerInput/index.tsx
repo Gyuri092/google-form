@@ -1,16 +1,18 @@
 import { css } from '@emotion/react';
 
 import { useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateAnswer } from '../../../slice/answerSlice';
 import { Questions } from '../../../slice/questionSlice';
 import { CheckboxAnswer } from '../CheckboxAnswer';
 import { DropDownAnswer } from '../DropDownAnswer';
 import { RadioButtonAnswer } from '../RadioButtonAnswer';
+import { RootState } from '../../../store';
 
 export const AnswerInput = ({ item }: { item: Questions }) => {
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
   const dispatch = useDispatch();
+  const answers = useSelector((state: RootState) => state.answers);
   const { id, type, isRequired } = item;
 
   const renderAnswer = () => {
@@ -38,6 +40,7 @@ export const AnswerInput = ({ item }: { item: Questions }) => {
             font-size: 11pt;
             padding: 2px;
           `}
+          value={answers.find((answer) => answer.id === id)?.value}
           onChange={(e) =>
             dispatch(
               updateAnswer({
@@ -66,6 +69,7 @@ export const AnswerInput = ({ item }: { item: Questions }) => {
           resize: none;
         `}
         rows={1}
+        value={answers.find((answer) => answer.id === id)?.value}
         onChange={(e) => {
           if (!textAreaRef.current) return;
           textAreaRef.current.style.height = 'auto';

@@ -13,6 +13,7 @@ export const Modal = () => {
       type: question.type,
       isRequired: question.isRequired,
       value: '',
+      checked: undefined,
     };
   });
   return (
@@ -26,17 +27,6 @@ export const Modal = () => {
         left: 0;
         cursor: initial;
       `}
-      //   onClick={(e) => {
-      //     const target = e.target as HTMLElement;
-      //     if (
-      //       target.tagName &&
-      //       target.tagName.toLowerCase() !== 'div' &&
-      //       target.tagName.toLowerCase() !== 'p'
-      //     ) {
-      //       e.stopPropagation();
-      //       dispatch(openModal(false));
-      //     }
-      //   }}
     >
       <div
         css={css`
