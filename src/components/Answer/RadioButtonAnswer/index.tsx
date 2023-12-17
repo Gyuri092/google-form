@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateAnswer } from '../../../slice/answerSlice';
 import { Questions } from '../../../slice/questionSlice';
@@ -10,13 +10,15 @@ export const RadioButtonAnswer = ({ item }: { item: Questions }) => {
   const textInputRef = useRef<HTMLInputElement | null>(null);
   const answers = useSelector((state: RootState) => state.answers);
   const dispatch = useDispatch();
+  const [isChecked, setIsChecked] = useState(false);
+  const [others, setOthers] = useState<number | null>(null);
 
   return (
     <div>
       {contents.map((option, idx) => {
         return (
           <label
-            key={`${option}-${idx - 0}`}
+            key={`${id}-${idx - 0}`}
             css={css`
               width: 100%;
               display: flex;
@@ -32,7 +34,7 @@ export const RadioButtonAnswer = ({ item }: { item: Questions }) => {
             <input
               required={isRequired}
               type="radio"
-              name={`radio-group-${idx}`}
+              name={`radio-group-${id}`}
               css={css`
                 width: 20px;
                 height: 24px;
@@ -43,8 +45,10 @@ export const RadioButtonAnswer = ({ item }: { item: Questions }) => {
                 margin-right: 10px;
               `}
               checked={
-                answers.find((answer) => answer.id === id)?.value === option &&
-                answers.find((answer) => answer.id === id)?.checked === idx
+                (answers.find((answer) => answer.id === id)?.value === option &&
+                  answers.find((answer) => answer.id === id)?.checked ===
+                    idx) ||
+                (idx === others && isChecked)
               }
               onChange={() => {
                 textInputRef.current?.focus();
@@ -57,6 +61,7 @@ export const RadioButtonAnswer = ({ item }: { item: Questions }) => {
                     checked: idx,
                   }),
                 );
+                setIsChecked(true);
               }}
               onBlur={() => textInputRef.current?.blur()}
             />
@@ -87,6 +92,10 @@ export const RadioButtonAnswer = ({ item }: { item: Questions }) => {
                         checked: idx,
                       }),
                     );
+                    setOthers(idx);
+                    setIsChecked(true);
+                  } else {
+                    setOthers(null);
                   }
                 }}
                 onBlur={() => textInputRef.current?.blur()}
@@ -96,53 +105,50 @@ export const RadioButtonAnswer = ({ item }: { item: Questions }) => {
         );
       })}
 
-      {answers.map((answer, idx) => {
-        return (
-          answer.value && (
-            <div
-              key={`${answer}-${idx - 0}`}
+      {isChecked && (
+        <div
+          key="unchecked-answer"
+          css={css`
+            display: flex;
+            justify-content: flex-end;
+            height: ${isChecked ? '36px' : '0px'};
+            transition: height 0.3s ease-in-out;
+          `}
+        >
+          {isChecked && (
+            <button
+              type="button"
               css={css`
-                display: flex;
-                justify-content: flex-end;
-                height: ${answer ? '36px' : '0px'};
-                transition: height 0.3s ease-in-out;
+                width: auto;
+                font-size: 14px;
+                padding: 0 8px;
+                border-radius: 4px;
+                color: #5f6368;
+                font-weight: 500;
+                line-height: 36px;
+                letter-spacing: 0.25px;
+                :hover {
+                  background: #f9f9f9;
+                }
               `}
+              onClick={() => {
+                dispatch(
+                  updateAnswer({
+                    id,
+                    type,
+                    isRequired,
+                    value: '',
+                    checked: undefined,
+                  }),
+                );
+                setIsChecked(false);
+              }}
             >
-              {answer && (
-                <button
-                  type="button"
-                  css={css`
-                    width: auto;
-                    font-size: 14px;
-                    padding: 0 8px;
-                    border-radius: 4px;
-                    color: #5f6368;
-                    font-weight: 500;
-                    line-height: 36px;
-                    letter-spacing: 0.25px;
-                    :hover {
-                      background: #f9f9f9;
-                    }
-                  `}
-                  onClick={() => {
-                    dispatch(
-                      updateAnswer({
-                        id,
-                        type,
-                        isRequired,
-                        value: '',
-                        checked: undefined,
-                      }),
-                    );
-                  }}
-                >
-                  선택해제
-                </button>
-              )}
-            </div>
-          )
-        );
-      })}
+              선택해제
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 };
