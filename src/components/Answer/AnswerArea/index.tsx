@@ -9,7 +9,6 @@ import { initializeAnswers } from '../../../slice/answerSlice';
 
 export const AnswerArea = () => {
   const questions = useSelector((state: RootState) => state.questions);
-  const surveyAnswers = useSelector((state: RootState) => state.answers);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const initialAnswers = questions.map((question) => {
@@ -22,10 +21,10 @@ export const AnswerArea = () => {
   });
 
   useEffect(() => {
-    if (surveyAnswers.length < questions.length) {
+    return () => {
       dispatch(initializeAnswers(initialAnswers));
-    }
-  }, [dispatch, initialAnswers, questions.length, surveyAnswers.length]);
+    };
+  }, [dispatch, initialAnswers]);
 
   return (
     <form

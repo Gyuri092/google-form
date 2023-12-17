@@ -7,6 +7,7 @@ export interface Answer {
   type: QuestionType;
   isRequired: boolean;
   value: string;
+  checked?: number;
 }
 
 const initialState: Answer[] = [
@@ -23,7 +24,7 @@ export const answerSlice = createSlice({
   initialState,
   reducers: {
     updateAnswer: (state, action: PayloadAction<Answer>) => {
-      const { id, type, isRequired, value } = action.payload;
+      const { id, type, isRequired, value, checked } = action.payload;
       return state.map((answer) => {
         if (answer.id === id) {
           return {
@@ -32,6 +33,7 @@ export const answerSlice = createSlice({
               isRequired !== undefined ? isRequired : answer.isRequired,
             type: type !== undefined ? type : answer.type,
             value: value !== undefined ? value : answer.value,
+            checked: checked !== undefined ? checked : answer.checked,
           };
         }
         return answer;

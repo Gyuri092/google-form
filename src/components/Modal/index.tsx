@@ -1,9 +1,20 @@
 import { css } from '@emotion/react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { openModal } from '../../slice/modalSlice';
+import { initializeAnswers } from '../../slice/answerSlice';
+import { RootState } from '../../store';
 
 export const Modal = () => {
+  const questions = useSelector((state: RootState) => state.questions);
   const dispatch = useDispatch();
+  const initialAnswers = questions.map((question) => {
+    return {
+      id: question.id,
+      type: question.type,
+      isRequired: question.isRequired,
+      value: '',
+    };
+  });
   return (
     <div
       css={css`
@@ -101,7 +112,15 @@ export const Modal = () => {
           <button type="button" onClick={() => dispatch(openModal(false))}>
             취소
           </button>
-          <button type="button">양식 지우기</button>
+          <button
+            type="button"
+            onClick={() => {
+              dispatch(initializeAnswers(initialAnswers));
+              dispatch(openModal(false));
+            }}
+          >
+            양식 지우기
+          </button>
         </div>
       </div>
     </div>
