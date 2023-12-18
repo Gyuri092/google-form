@@ -1,14 +1,16 @@
 import { css } from '@emotion/react';
 import { useState } from 'react';
 import { GoTriangleDown, GoTriangleUp } from 'react-icons/go';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Questions } from '../../../slice/questionSlice';
 import { updateAnswer } from '../../../slice/answerSlice';
+import { RootState } from '../../../store';
 
 export const DropDownAnswer = ({ item }: { item: Questions }) => {
   const { id, type, contents, isRequired } = item;
   const [isSelected, setIsSelected] = useState(false);
   const [selectedValue, setSelectedValue] = useState('선택');
+  const answers = useSelector((state: RootState) => state.answers);
   const dispatch = useDispatch();
 
   const calculateTop = () => {
@@ -119,7 +121,7 @@ export const DropDownAnswer = ({ item }: { item: Questions }) => {
           }
         `}
       >
-        <p>{selectedValue}</p>
+        <p>{answers.find((answer) => answer.id === id)?.value ?? '선택'}</p>
         {isSelected ? <GoTriangleUp /> : <GoTriangleDown />}
       </div>
       {isSelected && (

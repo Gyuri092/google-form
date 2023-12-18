@@ -14,6 +14,7 @@ export const SurveyPreview = () => {
         display: flex;
         justify-content: center;
         padding: 50px 0;
+        position: relative;
       `}
     >
       <div

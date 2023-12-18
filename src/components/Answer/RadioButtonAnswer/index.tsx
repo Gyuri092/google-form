@@ -70,7 +70,10 @@ export const RadioButtonAnswer = ({ item }: { item: Questions }) => {
             <p>{option.includes('기타') ? '기타: ' : option}</p>
             {option.includes('기타') && (
               <input
-                required={isRequired}
+                required={
+                  isRequired &&
+                  answers.find((answer) => answer.id === id)?.checked === others
+                }
                 type="text"
                 name="radio-others"
                 ref={textInputRef}
@@ -112,48 +115,49 @@ export const RadioButtonAnswer = ({ item }: { item: Questions }) => {
         );
       })}
 
-      {isChecked && answers.find((answer) => answer.id === id)?.checked && (
-        <div
-          key="unchecked-answer"
-          css={css`
-            display: flex;
-            justify-content: flex-end;
-            height: 36px;
-            transition: height 0.3s ease-in-out;
-          `}
-        >
-          <button
-            type="button"
+      {isChecked &&
+        answers.map((answer) => answer.checked !== undefined).length > 0 && (
+          <div
+            key="unchecked-answer"
             css={css`
-              width: auto;
-              font-size: 14px;
-              padding: 0 8px;
-              border-radius: 4px;
-              color: #5f6368;
-              font-weight: 500;
-              line-height: 36px;
-              letter-spacing: 0.25px;
-              :hover {
-                background: #f9f9f9;
-              }
+              display: flex;
+              justify-content: flex-end;
+              height: 36px;
+              transition: height 0.3s ease-in-out;
             `}
-            onClick={() => {
-              dispatch(
-                updateAnswer({
-                  id,
-                  type,
-                  isRequired,
-                  value: '',
-                  checked: undefined,
-                }),
-              );
-              setIsChecked(false);
-            }}
           >
-            선택해제
-          </button>
-        </div>
-      )}
+            <button
+              type="button"
+              css={css`
+                width: auto;
+                font-size: 14px;
+                padding: 0 8px;
+                border-radius: 4px;
+                color: #5f6368;
+                font-weight: 500;
+                line-height: 36px;
+                letter-spacing: 0.25px;
+                :hover {
+                  background: #f9f9f9;
+                }
+              `}
+              onClick={() => {
+                dispatch(
+                  updateAnswer({
+                    id,
+                    type,
+                    isRequired,
+                    value: '',
+                    checked: undefined,
+                  }),
+                );
+                setIsChecked(false);
+              }}
+            >
+              선택해제
+            </button>
+          </div>
+        )}
     </div>
   );
 };

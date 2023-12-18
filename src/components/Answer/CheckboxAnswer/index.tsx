@@ -1,14 +1,17 @@
 import { css } from '@emotion/react';
 import { useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateAnswer } from '../../../slice/answerSlice';
 import { Questions } from '../../../slice/questionSlice';
+import { RootState } from '../../../store';
 
 export const CheckboxAnswer = ({ item }: { item: Questions }) => {
   const { id, type, contents, isRequired } = item;
   const textInputRef = useRef<HTMLInputElement | null>(null);
   const [isChecked, setIsChecked] = useState(false);
+  const [others, setOthers] = useState<number | null>(null);
   const dispatch = useDispatch();
+  const answers = useSelector((state: RootState) => state.answers);
 
   return contents.map((option, idx) => {
     if (!option.includes('기타')) {
@@ -40,7 +43,13 @@ export const CheckboxAnswer = ({ item }: { item: Questions }) => {
             `}
             onChange={() =>
               dispatch(
-                updateAnswer({ id, type, isRequired, value: option ?? '' }),
+                updateAnswer({
+                  id,
+                  type,
+                  isRequired,
+                  value: option ?? '',
+                  checked: idx,
+                }),
               )
             }
           />
@@ -96,8 +105,14 @@ export const CheckboxAnswer = ({ item }: { item: Questions }) => {
             padding: 2px;
             margin-right: 10px;
           `}
+          value={
+            answers.find((answer) => answer.id === id)?.checked === others
+              ? answers.find((answer) => answer.id === id)?.value
+              : ''
+          }
           onChange={(e) => {
             if (e.target.value) {
+              setOthers(idx);
               setIsChecked(true);
               dispatch(
                 updateAnswer({
@@ -105,8 +120,11 @@ export const CheckboxAnswer = ({ item }: { item: Questions }) => {
                   type,
                   isRequired,
                   value: e.target.value,
+                  checked: idx,
                 }),
               );
+            } else {
+              setOthers(null);
             }
           }}
         />
