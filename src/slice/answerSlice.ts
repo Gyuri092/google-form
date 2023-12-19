@@ -7,7 +7,7 @@ export interface Answer {
   type: QuestionType;
   isRequired: boolean;
   value: string;
-  checked?: number;
+  checked?: number[];
 }
 
 const initialState: Answer[] = [

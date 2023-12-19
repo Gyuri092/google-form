@@ -8,7 +8,6 @@ import { RootState } from '../../../store';
 export const CheckboxAnswer = ({ item }: { item: Questions }) => {
   const { id, type, contents, isRequired } = item;
   const textInputRef = useRef<HTMLInputElement | null>(null);
-  const [isChecked, setIsChecked] = useState(false);
   const [others, setOthers] = useState<number | null>(null);
   const dispatch = useDispatch();
   const answers = useSelector((state: RootState) => state.answers);
@@ -41,17 +40,28 @@ export const CheckboxAnswer = ({ item }: { item: Questions }) => {
               padding: 2px;
               margin-right: 10px;
             `}
-            onChange={() =>
+            checked={
+              answers
+                .find((answer) => answer.id === id)
+                ?.checked?.includes(idx) ?? false
+            }
+            onChange={() => {
+              const existingChecked =
+                answers.find((answer) => answer.id === id)?.checked || [];
+              const updatedChecked = existingChecked.includes(idx)
+                ? [...existingChecked.filter((value) => value !== idx)]
+                : [...existingChecked.filter((value) => value !== idx), idx];
+
               dispatch(
                 updateAnswer({
                   id,
                   type,
                   isRequired,
                   value: option ?? '',
-                  checked: idx,
+                  checked: updatedChecked.sort((a, b) => a - b),
                 }),
-              )
-            }
+              );
+            }}
           />
           <p>{option}</p>
         </label>
@@ -83,12 +93,30 @@ export const CheckboxAnswer = ({ item }: { item: Questions }) => {
             padding: 2px;
             margin-right: 10px;
           `}
+          checked={
+            answers
+              .find((answer) => answer.id === id)
+              ?.checked?.includes(idx) ?? false
+          }
           onChange={() => {
             textInputRef.current?.focus();
-            setIsChecked((prev) => !prev);
+            const existingChecked =
+              answers.find((answer) => answer.id === id)?.checked || [];
+            const updatedChecked = existingChecked.includes(idx)
+              ? [...existingChecked.filter((value) => value !== idx)]
+              : [...existingChecked.filter((value) => value !== idx), idx];
+
+            dispatch(
+              updateAnswer({
+                id,
+                type,
+                isRequired,
+                value: option ?? '',
+                checked: updatedChecked.sort((a, b) => a - b),
+              }),
+            );
           }}
           onBlur={() => textInputRef.current?.blur()}
-          checked={isChecked}
         />
         <p>기타: </p>
         <input
@@ -105,22 +133,16 @@ export const CheckboxAnswer = ({ item }: { item: Questions }) => {
             padding: 2px;
             margin-right: 10px;
           `}
-          value={
-            answers.find((answer) => answer.id === id)?.checked === others
-              ? answers.find((answer) => answer.id === id)?.value
-              : ''
-          }
+          value={answers.find((answer) => answer.id === id)?.value}
           onChange={(e) => {
             if (e.target.value) {
               setOthers(idx);
-              setIsChecked(true);
               dispatch(
                 updateAnswer({
                   id,
                   type,
                   isRequired,
                   value: e.target.value,
-                  checked: idx,
                 }),
               );
             } else {

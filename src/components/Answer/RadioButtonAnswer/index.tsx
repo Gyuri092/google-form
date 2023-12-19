@@ -46,10 +46,10 @@ export const RadioButtonAnswer = ({ item }: { item: Questions }) => {
               `}
               checked={
                 (answers.find((answer) => answer.id === id)?.value === option &&
-                  answers.find((answer) => answer.id === id)?.checked ===
+                  answers.find((answer) => answer.id === id)?.checked?.[0] ===
                     idx) ||
-                ((answers.find((answer) => answer.id === id)?.checked === idx &&
-                  idx) === others &&
+                ((answers.find((answer) => answer.id === id)?.checked?.[0] ===
+                  idx && idx) === others &&
                   isChecked)
               }
               onChange={() => {
@@ -60,7 +60,7 @@ export const RadioButtonAnswer = ({ item }: { item: Questions }) => {
                     type,
                     isRequired,
                     value: option,
-                    checked: idx,
+                    checked: [idx],
                   }),
                 );
                 setIsChecked(true);
@@ -72,7 +72,8 @@ export const RadioButtonAnswer = ({ item }: { item: Questions }) => {
               <input
                 required={
                   isRequired &&
-                  answers.find((answer) => answer.id === id)?.checked === others
+                  answers.find((answer) => answer.id === id)?.checked?.[0] ===
+                    others
                 }
                 type="text"
                 name="radio-others"
@@ -87,7 +88,8 @@ export const RadioButtonAnswer = ({ item }: { item: Questions }) => {
                   margin-right: 10px;
                 `}
                 value={
-                  answers.find((answer) => answer.id === id)?.checked === others
+                  answers.find((answer) => answer.id === id)?.checked?.[0] ===
+                  others
                     ? answers.find((answer) => answer.id === id)?.value
                     : ''
                 }
@@ -99,7 +101,7 @@ export const RadioButtonAnswer = ({ item }: { item: Questions }) => {
                         type,
                         isRequired,
                         value: e.target.value,
-                        checked: idx,
+                        checked: [idx],
                       }),
                     );
                     setOthers(idx);
