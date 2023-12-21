@@ -8,6 +8,7 @@ import { AnswerSubmitArea } from '../AnswerSubmitArea';
 
 export const AnswerArea = () => {
   const questions = useSelector((state: RootState) => state.questions);
+  const answers = useSelector((state: RootState) => state.answers);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const initialAnswers = questions.map((question) => {
@@ -23,6 +24,16 @@ export const AnswerArea = () => {
     <form
       onSubmit={(e) => {
         e.preventDefault();
+        const requiredInputMissing = answers.find(
+          (answer) =>
+            answer.isRequired &&
+            (!answer.value ||
+              (answer.type === 'drop-down' && answer.value === '선택')),
+        );
+        if (requiredInputMissing) {
+          alert('필수 입력 값을 모두 입력해야 합니다.');
+          return;
+        }
         navigate('/response');
         dispatch(initializeAnswers(initialAnswers));
       }}

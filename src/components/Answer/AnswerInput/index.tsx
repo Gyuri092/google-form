@@ -66,6 +66,7 @@ export const AnswerInput = ({ item }: { item: Questions }) => {
           border-bottom: 1px solid #dadce0;
           font-size: 11pt;
           padding: 2px;
+          overflow: hidden;
           resize: none;
         `}
         rows={1}
