@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateAnswer } from '../../../slice/answerSlice';
 import { Questions } from '../../../slice/questionSlice';
@@ -8,7 +8,6 @@ import { RootState } from '../../../store';
 export const CheckboxAnswer = ({ item }: { item: Questions }) => {
   const { id, type, contents, isRequired } = item;
   const textInputRef = useRef<HTMLInputElement | null>(null);
-  const [others, setOthers] = useState<number | null>(null);
   const dispatch = useDispatch();
   const answers = useSelector((state: RootState) => state.answers);
 
@@ -93,11 +92,9 @@ export const CheckboxAnswer = ({ item }: { item: Questions }) => {
             padding: 2px;
             margin-right: 10px;
           `}
-          checked={
-            answers
-              .find((answer) => answer.id === id)
-              ?.checked?.includes(idx) ?? false
-          }
+          checked={answers
+            .find((answer) => answer.id === id)
+            ?.checked?.includes(idx)}
           onChange={() => {
             textInputRef.current?.focus();
             const existingChecked =
@@ -135,19 +132,30 @@ export const CheckboxAnswer = ({ item }: { item: Questions }) => {
           `}
           value={answers.find((answer) => answer.id === id)?.value}
           onChange={(e) => {
-            if (e.target.value) {
-              setOthers(idx);
+            if (!answers.find((answer) => answer.id === id)?.value) {
+              const existingChecked =
+                answers.find((answer) => answer.id === id)?.checked || [];
+              const updatedChecked = existingChecked.includes(idx)
+                ? [...existingChecked.filter((value) => value !== idx)]
+                : [...existingChecked.filter((value) => value !== idx), idx];
               dispatch(
                 updateAnswer({
                   id,
                   type,
                   isRequired,
                   value: e.target.value,
+                  checked: updatedChecked.sort((a, b) => a - b),
                 }),
               );
-            } else {
-              setOthers(null);
             }
+            dispatch(
+              updateAnswer({
+                id,
+                type,
+                isRequired,
+                value: e.target.value,
+              }),
+            );
           }}
         />
       </label>
