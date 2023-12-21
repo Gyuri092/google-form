@@ -27,7 +27,9 @@ export const CheckboxAnswer = ({ item }: { item: Questions }) => {
           `}
         >
           <input
-            required={isRequired}
+            required={
+              isRequired && !answers.find((answer) => answer.id === id)?.checked
+            }
             type="checkbox"
             name="checkbox"
             css={css`
@@ -81,7 +83,9 @@ export const CheckboxAnswer = ({ item }: { item: Questions }) => {
         `}
       >
         <input
-          required={isRequired}
+          required={
+            isRequired && !answers.find((answer) => answer.id === id)?.checked
+          }
           type="checkbox"
           css={css`
             width: 20px;
@@ -117,7 +121,6 @@ export const CheckboxAnswer = ({ item }: { item: Questions }) => {
         />
         <p>기타: </p>
         <input
-          required={isRequired}
           type="text"
           name="check-others"
           ref={textInputRef}
