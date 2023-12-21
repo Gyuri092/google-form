@@ -42,16 +42,6 @@ export const answerSlice = createSlice({
     initializeAnswers: (_, action: PayloadAction<Answer[]>) => {
       return action.payload;
     },
-    // initializeAnswer: (state) => {
-    //   return state.map((answer) => {
-    //     return {
-    //       id: answer.id,
-    //       type: answer.type,
-    //       isRequired: answer.isRequired,
-    //       value: '',
-    //     };
-    //   });
-    // },
   },
 });
 
